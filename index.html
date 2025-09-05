@@ -60,30 +60,28 @@
 
 
        /* --- CUSTOM BACKGROUNDS --- */
-       body.space-nebula-bg { background: linear-gradient(45deg, #0f0c29, #302b63, #24243e); }
-       body.matrix-bg {
+       body.space-nebula-bg, .preview-content.space-nebula-bg { background: linear-gradient(45deg, #0f0c29, #302b63, #24243e); }
+       body.matrix-bg, .preview-content.matrix-bg {
            background-color: #000;
            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ctext x='0' y='20' font-family='monospace' font-size='10' fill='rgba(0, 255, 0, 0.3)'%3E01%3C/text%3E%3Ctext x='10' y='40' font-family='monospace' font-size='10' fill='rgba(0, 255, 0, 0.3)'%3EAB%3C/text%3E%3Ctext x='20' y='60' font-family='monospace' font-size='10' fill='rgba(0, 255, 0, 0.3)'%3E11%3C/text%3E%3Ctext x='30' y='80' font-family='monospace' font-size='10' fill='rgba(0, 255, 0, 0.3)'%3ECD%3C/text%3E%3Ctext x='40' y='100' font-family='monospace' font-size='10' fill='rgba(0, 255, 0, 0.3)'%3E00%3C/text%3E%3C/svg%3E");
            animation: matrix-scroll 5s linear infinite;
-           position: relative;
-           z-index: 0;
        }
-       body.matrix-bg::before {
+       body.matrix-bg::before, .preview-content.matrix-bg::before {
            content: '';
-           position: fixed;
+           position: absolute;
            top: 0; left: 0;
            width: 100%; height: 100%;
            background: radial-gradient(rgba(0, 150, 0, 0.75), black 120%);
            pointer-events: none;
-           z-index: -1;
+           z-index: 0;
        }
        @keyframes matrix-scroll { from { background-position: 0 0; } to { background-position: 0 -100px; } }
-       body.magic-forest-bg { background-color: var(--bg-color); }
-       .firefly { position: fixed; left: -10px; top: 50%; width: 5px; height: 5px; background-color: #89f5b2; border-radius: 50%; box-shadow: 0 0 10px #89f5b2, 0 0 20px #89f5b2; animation: firefly-float linear infinite; pointer-events: none; }
+       body.magic-forest-bg, .preview-content.magic-forest-bg { background-color: var(--bg-color); }
+       .firefly { position: absolute; left: -10px; top: 50%; width: 5px; height: 5px; background-color: #89f5b2; border-radius: 50%; box-shadow: 0 0 10px #89f5b2, 0 0 20px #89f5b2; animation: firefly-float linear infinite; pointer-events: none; }
        @keyframes firefly-float { 0% { transform: translateX(0) translateY(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(105vw) translateY(var(--y-end)); opacity: 0; } }
-       body.liquid-waves-bg { background: linear-gradient(125deg, #ff3cac, #784ba0, #2b86c5); background-size: 200% 200%; animation: gradient 10s ease infinite; }
+       body.liquid-waves-bg, .preview-content.liquid-waves-bg { background: linear-gradient(125deg, #ff3cac, #784ba0, #2b86c5); background-size: 200% 200%; animation: gradient 10s ease infinite; }
        
-       body.cyber-grid-bg {
+       body.cyber-grid-bg, .preview-content.cyber-grid-bg {
            background-color: #01041c;
            background-image:
                linear-gradient(rgba(0, 255, 255, 0.2) 1px, transparent 1px),
@@ -93,11 +91,10 @@
            background-size: 50px 50px, 50px 50px, 100px 100px, 100px 100px;
            background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
            animation: scroll-grid 4s linear infinite;
-           position: relative;
        }
-       body.cyber-grid-bg::before {
+       body.cyber-grid-bg::before, .preview-content.cyber-grid-bg::before {
            content: '';
-           position: fixed;
+           position: absolute;
            top: 0; left: 0;
            width: 100%; height: 100%;
            background: radial-gradient(ellipse at center, transparent 30%, #01041c 100%);
@@ -177,7 +174,7 @@
            text-shadow: 0 0 3px rgba(65, 105, 225, 0.5);
        }
        .circle.vortex-skin::before {
-           content: "·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·....-";
+           content: "·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·.·....-";
            position: absolute;
            width: 250%;
            height: 250%;
@@ -200,9 +197,9 @@
        @keyframes ocean-bubbles { to { transform: translateY(-220px); } }
        .circle.hacker-skin { background: #000; border-color: #0f0; box-shadow: 0 0 20px #0f0, inset 0 0 10px #0f0; font-family: monospace; color: #0f0; text-shadow: 0 0 5px #0f0; }
        .circle.hacker-skin::before { content: ''; position: absolute; width: 100%; height: 3px; background: #0f0; box-shadow: 0 0 5px #0f0; animation: hacker-scan 3s linear infinite; }
-       .circle.hacker-skin::after { content: 'Hacker code HACKERMAN'; position: absolute; bottom: 10px; left: 10px; font-size: 10px; opacity: 0.7; animation: text-flicker 3s infinite; }
+       .circle.hacker-skin::after { content: 'Promocode: OMEGASTARCASE'; position: absolute; bottom: 10px; left: 10px; font-size: 10px; opacity: 0; animation: text-flicker-secret 10s infinite; }
        @keyframes hacker-scan { from { top: 0%; } to { top: 100%; } }
-       @keyframes text-flicker { 0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 0.7; } 20%, 24%, 55% { opacity: 0.3; } }
+       @keyframes text-flicker-secret { 0%, 94%, 100% { opacity: 0; } 95%, 99% { opacity: 0.7; } 96%, 98% { opacity: 0.3; } }
        
        .circle.radiation-skin {
            background: radial-gradient(circle, #aaff00 0%, #558b2f 100%);
@@ -216,10 +213,12 @@
            position: absolute; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;
            animation: rotate-vortex 20s linear infinite;
        }
+        /* IMPROVED Cosmic Rift Skin */
        .circle.cosmic-rift-skin {
            background: #000010;
            overflow: hidden;
            position: relative;
+           border-color: #3e2166;
        }
        .circle.cosmic-rift-skin::before {
            content: '';
@@ -238,11 +237,25 @@
        .circle.cosmic-rift-skin::after {
            content: '';
            position: absolute;
+           top: 0;
+           left: 0;
            width: 100%;
            height: 100%;
-           background: radial-gradient(ellipse, transparent 40%, #000010 75%);
+           background: black;
+           clip-path: polygon(45% 0, 52% 28%, 48% 30%, 55% 45%, 50% 48%, 58% 68%, 55% 70%, 60% 100%, 50% 100%, 45% 75%, 50% 72%, 42% 55%, 48% 52%, 40% 35%, 44% 32%);
+           animation: rift-glow 4s infinite ease-in-out;
+           box-shadow: 0 0 15px 5px #a252ff, 0 0 25px 10px #6134eb, inset 0 0 10px #ff59f5;
        }
-
+       @keyframes rift-glow {
+            0%, 100% {
+                box-shadow: 0 0 15px 5px #a252ff, 0 0 25px 10px #6134eb, inset 0 0 10px #ff59f5;
+                filter: brightness(1);
+            }
+            50% {
+                box-shadow: 0 0 25px 8px #a252ff, 0 0 40px 15px #6134eb, inset 0 0 15px #ff59f5;
+                filter: brightness(1.5);
+            }
+       }
        /* --- END SKINS --- */
        
        @keyframes rotate-vortex { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -287,6 +300,21 @@
        @keyframes hacker-square-fly { from { transform: translate(0, 0) rotate(0deg); opacity: 1; } to { transform: translate(var(--spark-x), var(--spark-y)) rotate(360deg); opacity: 0; } }
        .radiation-tap-effect { position: absolute; width: 10px; height: 10px; border-radius: 50%; border: 3px solid #aaff00; pointer-events: none; animation: radiation-wave 0.6s linear forwards; }
        @keyframes radiation-wave { from { transform: scale(0); opacity: 1; } to { transform: scale(20); opacity: 0; } }
+       
+       .cosmic-rift-tap-effect {
+           position: absolute;
+           width: 4px;
+           height: 4px;
+           background-color: white;
+           border-radius: 50%;
+           pointer-events: none;
+           box-shadow: 0 0 5px white, 0 0 10px #a252ff;
+           animation: rift-star-fade 0.8s ease-out forwards;
+       }
+       @keyframes rift-star-fade {
+           from { transform: scale(1); opacity: 1; }
+           to { transform: scale(0); opacity: 0; }
+       }
        /* --- END TAP EFFECTS --- */
 
 
@@ -431,7 +459,7 @@
        }
        .settings-info-row:last-of-type { border-bottom: none; }
        .settings-info-label { opacity: 0.8; }
-       .settings-info-value { font-weight: bold; }
+       .settings-info-value { font-weight: bold; cursor: help; }
        #settingsPlayerId { color: #00ffff; word-break: break-all; }
        
        .settings-actions { 
@@ -453,6 +481,9 @@
            box-sizing: border-box;
        }
        .settings-btn:hover, .settings-toggle-btn:hover { background-color: rgba(255, 255, 255, 0.2); }
+       .full-width-btn {
+            grid-column: 1 / -1;
+       }
        .full-reset-btn { 
            background-color: var(--danger-color); 
            border-color: var(--danger-color);
@@ -489,12 +520,20 @@
        #cancelBtn { background-color: rgba(255, 255, 255, 0.1); flex-grow: 1; }
        #confirmBtn:hover { background-color: var(--danger-color-hover); }
        #cancelBtn:hover { background-color: rgba(255, 255, 255, 0.2); }
+       
+       #changelogModal .modal-content ul {
+           list-style-type: '✅';
+           padding-left: 20px;
+       }
+       #changelogModal .modal-content li {
+            padding-left: 10px;
+            margin-bottom: 8px;
+       }
 
        .shop-tabs { display: flex; margin-bottom: 15px; border-bottom: 1px solid var(--currency-border); }
        .shop-tab { padding: 8px 15px; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
        .shop-tab.active { border-bottom: 2px solid #00ffff; }
        
-       /* MODIFIED: Shop Layout */
        .shop-content {
            max-height: 400px;
            overflow-y: auto;
@@ -524,6 +563,7 @@
        .item-name {
            font-size: 16px;
            font-weight: bold;
+           margin-bottom: auto;
        }
        .item-desc {
            display: none;
@@ -531,6 +571,33 @@
        .item-actions {
            margin-top: 15px;
            width: 100%;
+           display: flex;
+           flex-direction: column;
+           gap: 10px;
+       }
+       .item-button-group {
+           display: flex;
+           gap: 8px;
+       }
+       .item-button-group .buy-btn {
+           flex-grow: 1;
+       }
+       .preview-btn {
+           width: 45px;
+           height: auto;
+           flex-shrink: 0;
+           padding: 10px;
+           font-size: 16px;
+           line-height: 1;
+           background-color: rgba(66, 153, 225, 0.3);
+           border: 1px solid rgba(66, 153, 225, 0.5);
+           color: white;
+           border-radius: 5px;
+           cursor: pointer;
+           transition: background-color 0.2s;
+       }
+       .preview-btn:hover {
+           background-color: rgba(66, 153, 225, 0.5);
        }
        .item-price {
            font-size: 16px;
@@ -858,23 +925,40 @@
            margin-top: 15px;
        }
        
-       .animation-close-btn {
-           margin-top: 20px;
+       .animation-button-container {
+           position: absolute;
+           bottom: 20px;
+           left: 50%;
+           transform: translateX(-50%);
+           display: flex;
+           gap: 15px;
+           visibility: hidden;
+           opacity: 0;
+           transition: opacity 0.5s;
+       }
+        .animation-button-container.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+
+       .animation-close-btn, .animation-skip-btn {
            padding: 10px 25px;
            font-size: 18px;
            cursor: pointer;
            border-radius: 8px;
            border: 1px solid var(--currency-border);
-           background-color: var(--success-color);
            color: var(--text-color);
-           visibility: hidden;
-           opacity: 0;
-           transition: opacity 0.5s;
        }
-        .animation-close-btn.visible {
-            visibility: visible;
-            opacity: 1;
-        }
+       .animation-close-btn {
+           background-color: var(--success-color);
+       }
+       .animation-skip-btn {
+           background-color: var(--info-color);
+           position: absolute;
+           bottom: 20px;
+           left: 50%;
+           transform: translateX(-50%);
+       }
        
        #boxOpeningContainer {
            display: flex;
@@ -906,6 +990,22 @@
            font-size: 24px;
            font-weight: bold;
            margin-top: 15px;
+       }
+
+        #previewModal .modal-content { padding: 0; }
+        .preview-content {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           height: 300px;
+           position: relative;
+           overflow: hidden;
+           border-radius: 10px;
+           background-color: var(--bg-color);
+        }
+       .preview-circle {
+           transform: scale(1.1);
+           cursor: pointer;
        }
 
    </style>
@@ -964,7 +1064,7 @@
    <div class="modal-overlay" id="shop">
        <div class="modal">
            <div class="modal-header">
-               <div class="modal-title">Магазин</div>
+               <div class="modal-title" id="shopTitle">Магазин</div>
                <div class="close-modal">✕</div>
            </div>
            <div class="shop-tabs">
@@ -1069,7 +1169,7 @@
     <div class="modal-overlay" id="rebirthModal">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-title">Перерождение</div>
+                <div class="modal-title" title="Секретный промокод: BOXSECRET">Перерождение</div>
                 <div class="close-modal">✕</div>
             </div>
             <div class="modal-content">
@@ -1129,7 +1229,7 @@
            <div class="modal-content">
                <div class="settings-info-row">
                    <span class="settings-info-label">Версия:</span>
-                   <span class="settings-info-value" id="gameVersion">v_3.6</span>
+                   <span class="settings-info-value" id="gameVersion">v_3.7.1</span>
                </div>
                <div class="settings-info-row">
                    <span class="settings-info-label">Время в игре:</span>
@@ -1143,7 +1243,9 @@
                    <button class="settings-btn" id="copyIdBtn">Копировать ID</button>
                    <button class="settings-btn" id="changeIdBtn">Сменить ID <br> (1 🔄)</button>
                    <button class="settings-toggle-btn" id="autoThemeToggleBtn">Auto-тема</button>
+                   <button class="settings-toggle-btn" id="quickOpeningToggleBtn">Быстрое открытие</button>
                    <button class="settings-toggle-btn" id="antiLagToggleBtn">Анти-лаг</button>
+                   <button class="settings-btn" id="changelogBtn">Changelog</button>
                    <button class="telegram-btn" id="telegramBtn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1024px-Telegram_logo.svg.png" alt="Логотип Telegram"> Telegram Канал</button>
                    <button class="settings-btn full-reset-btn" id="fullResetBtn">Полный сброс</button>
                </div>
@@ -1151,6 +1253,21 @@
        </div>
    </div>
 
+    <div class="modal-overlay" id="changelogModal">
+       <div class="modal">
+           <div class="modal-header">
+               <div class="modal-title">Список изменений (v3.7.1)</div>
+               <div class="close-modal">✕</div>
+           </div>
+           <div class="modal-content">
+                <ul>
+                    <li>Добавлена кнопка "Changelog" в настройках для просмотра последних изменений.</li>
+                    <li>В магазине на купленных предметах (скинах и фонах) теперь отображается надпись "Куплено" вместо цены.</li>
+                    <li>Незначительные исправления ошибок и улучшения производительности.</li>
+                </ul>
+           </div>
+       </div>
+   </div>
 
    <div class="modal-overlay" id="confirmationModal">
        <div class="modal">
@@ -1178,7 +1295,10 @@
                 <div id="wonPrizeName"></div>
             </div>
         </div>
-        <button id="closeAnimationBtn" class="animation-close-btn">Продолжить</button>
+        <button id="skipCaseBtn" class="animation-skip-btn">Пропустить</button>
+        <div id="caseResultContainer" class="animation-button-container">
+            <button id="closeAnimationBtn" class="animation-close-btn">Продолжить</button>
+        </div>
     </div>
     
     <div class="modal-overlay animation-overlay" id="boxAnimationOverlay">
@@ -1189,7 +1309,10 @@
              <img id="revealedCaseImage" src="" alt="Выпавший кейс">
              <div id="revealedCaseName"></div>
         </div>
-        <button id="closeBoxAnimationBtn" class="animation-close-btn">Открыть кейс</button>
+        <button id="skipBoxBtn" class="animation-skip-btn">Пропустить</button>
+        <div id="boxResultContainer" class="animation-button-container">
+            <button id="closeBoxAnimationBtn" class="animation-close-btn">Открыть кейс</button>
+        </div>
     </div>
 
    <div class="modal-overlay" id="caseInfoModal">
@@ -1202,6 +1325,20 @@
            </div>
        </div>
    </div>
+   
+   <div class="modal-overlay" id="previewModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="previewTitle">Предпросмотр</div>
+                <div class="close-modal">✕</div>
+            </div>
+            <div class="modal-content">
+                 <div id="previewContent" class="preview-content">
+                    <!-- Preview will be generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
 
 
    <script>
@@ -1240,6 +1377,7 @@
            const rebirthBtn = document.getElementById('rebirthBtn');
            const allModals = document.querySelectorAll('.modal-overlay');
            const shop = document.getElementById('shop');
+           const shopTitle = document.getElementById('shopTitle');
            const shopTabs = document.querySelectorAll('#shop .shop-tab');
            const skinsTab = document.getElementById('skinsTab');
            const boostsTab = document.getElementById('boostsTab');
@@ -1271,6 +1409,7 @@
            const rebirthCostDisplay = document.getElementById('rebirthCostDisplay');
            const rebirthBtnConfirm = document.getElementById('rebirthBtnConfirm');
            const settingsModal = document.getElementById('settingsModal');
+           const gameVersionElement = document.getElementById('gameVersion');
            const playTimeElement = document.getElementById('playTime');
            const settingsPlayerId = document.getElementById('settingsPlayerId');
            const copyIdBtn = document.getElementById('copyIdBtn');
@@ -1278,7 +1417,10 @@
            const fullResetBtn = document.getElementById('fullResetBtn');
            const telegramBtn = document.getElementById('telegramBtn');
            const autoThemeToggleBtn = document.getElementById('autoThemeToggleBtn');
+           const quickOpeningToggleBtn = document.getElementById('quickOpeningToggleBtn');
            const antiLagToggleBtn = document.getElementById('antiLagToggleBtn');
+           const changelogBtn = document.getElementById('changelogBtn');
+           const changelogModal = document.getElementById('changelogModal');
            const confirmationModal = document.getElementById('confirmationModal');
            const confirmationModalContent = document.getElementById('confirmationModalContent');
            const confirmBtn = document.getElementById('confirmBtn');
@@ -1289,6 +1431,8 @@
             const wonPrizeContainer = document.getElementById('wonPrizeContainer');
             const wonPrizeIcon = document.getElementById('wonPrizeIcon');
             const wonPrizeName = document.getElementById('wonPrizeName');
+            const skipCaseBtn = document.getElementById('skipCaseBtn');
+            const caseResultContainer = document.getElementById('caseResultContainer');
             const closeAnimationBtn = document.getElementById('closeAnimationBtn');
             const boxAnimationOverlay = document.getElementById('boxAnimationOverlay');
             const boxOpeningContainer = document.getElementById('boxOpeningContainer');
@@ -1296,14 +1440,19 @@
             const revealedCaseContainer = document.getElementById('revealedCaseContainer');
             const revealedCaseImage = document.getElementById('revealedCaseImage');
             const revealedCaseName = document.getElementById('revealedCaseName');
+            const skipBoxBtn = document.getElementById('skipBoxBtn');
+            const boxResultContainer = document.getElementById('boxResultContainer');
             const closeBoxAnimationBtn = document.getElementById('closeBoxAnimationBtn');
             const caseInfoModal = document.getElementById('caseInfoModal');
             const caseInfoTitle = document.getElementById('caseInfoTitle');
             const caseInfoContent = document.getElementById('caseInfoContent');
+            const previewModal = document.getElementById('previewModal');
+            const previewTitle = document.getElementById('previewTitle');
+            const previewContent = document.getElementById('previewContent');
 
 
            // --- Game State ---
-           let coins, crystals, currentTheme, autoThemeEnabled, currentSkin, ownedSkins, currentBackground, ownedBackgrounds, usedPromoCodes, activeQuests, playerId, usedCipherCodes, totalPlayTime, rebirthLevel, antiLagEnabled, idChanged;
+           let coins, crystals, currentTheme, autoThemeEnabled, currentSkin, ownedSkins, currentBackground, ownedBackgrounds, usedPromoCodes, activeQuests, playerId, usedCipherCodes, totalPlayTime, rebirthLevel, antiLagEnabled, idChanged, quickOpeningEnabled;
            let sessionStartTime = Date.now();
            let activeBoosts = [];
            let coinMultiplier = 1;
@@ -1317,52 +1466,62 @@
            let playTimeInterval = null;
            let glitchToastTimer = null; 
            let glitchRedirectTimer = null;
+           let versionHoldTimer = null;
            let caseBoxPrice = 0;
+           let currentAnimationReward = null;
+           let isAnimationRunning = false;
+           
+           let caseTransitionEndHandler = null;
+           let boxTimeoutId = null;
 
            const cases = [
                 { id: 'nature', name: 'Nature', price: 500, rewards: [
-                    { type: 'skin', value: 'ocean-skin', chance: 0.15, rarity: 'rare' },
-                    { type: 'background', value: 'magic-forest-bg', chance: 0.10, rarity: 'rare' },
-                    { type: 'coins', value: 25000, chance: 0.35, rarity: 'uncommon' },
-                    { type: 'coins', value: 10000, chance: 0.40, rarity: 'common' },
+                    { type: 'skin', value: 'ocean-skin', chance: 0.08, rarity: 'rare' },
+                    { type: 'background', value: 'magic-forest-bg', chance: 0.07, rarity: 'rare' },
+                    { type: 'coins', value: 25000, chance: 0.4, rarity: 'uncommon' },
+                    { type: 'coins', value: 10000, chance: 0.45, rarity: 'common' },
                 ]},
                 { id: 'shiny', name: 'Shiny', price: 1200, rewards: [
-                    { type: 'skin', value: 'premium-skin', chance: 0.12, rarity: 'rare' },
-                    { type: 'background', value: 'liquid-waves-bg', chance: 0.08, rarity: 'rare' },
+                    { type: 'skin', value: 'premium-skin', chance: 0.1, rarity: 'rare' },
+                    { type: 'background', value: 'liquid-waves-bg', chance: 0.05, rarity: 'rare' },
                     { type: 'crystals', value: 50, chance: 0.25, rarity: 'uncommon' },
-                    { type: 'coins', value: 50000, chance: 0.55, rarity: 'common' },
+                    { type: 'coins', value: 50000, chance: 0.6, rarity: 'common' },
                 ]},
                 { id: 'lightning', name: 'Lightning', price: 2500, rewards: [
-                    { type: 'skin', value: 'glitch-skin', chance: 0.10, rarity: 'epic' },
-                    { type: 'background', value: 'cyber-grid-bg', chance: 0.08, rarity: 'epic' },
+                    { type: 'skin', value: 'glitch-skin', chance: 0.08, rarity: 'epic' },
+                    { type: 'skin', value: 'vortex-skin', chance: 0.07, rarity: 'epic' },
+                    { type: 'coins', value: 150000, chance: 0.15, rarity: 'uncommon' },
                     { type: 'crystals', value: 150, chance: 0.3, rarity: 'rare' },
-                    { type: 'coins', value: 100000, chance: 0.52, rarity: 'common' },
+                    { type: 'coins', value: 100000, chance: 0.4, rarity: 'common' },
                 ]},
                 { id: 'molten', name: 'Molten', price: 5000, rewards: [
-                    { type: 'skin', value: 'legendary-skin', chance: 0.08, rarity: 'legendary' },
-                    { type: 'skin', value: 'radiation-skin', chance: 0.10, rarity: 'legendary' },
+                    { type: 'skin', value: 'legendary-skin', chance: 0.1, rarity: 'legendary' },
+                    { type: 'skin', value: 'ocean-skin', chance: 0.08, rarity: 'epic' },
+                    { type: 'coins', value: 200000, chance: 0.12, rarity: 'rare' },
                     { type: 'crystals', value: 300, chance: 0.3, rarity: 'epic' },
-                    { type: 'coins', value: 250000, chance: 0.52, rarity: 'uncommon' },
+                    { type: 'coins', value: 250000, chance: 0.4, rarity: 'uncommon' },
                 ]},
                 { id: 'crazy', name: 'Crazy', price: 8000, rewards: [
-                    { type: 'skin', value: 'hacker-skin', chance: 0.08, rarity: 'legendary' },
-                    { type: 'skin', value: 'cosmic-rift-skin', chance: 0.12, rarity: 'epic' },
+                    { type: 'skin', value: 'glitch-skin', chance: 0.1, rarity: 'epic' },
+                    { type: 'skin', value: 'hacker-skin', chance: 0.05, rarity: 'legendary' },
+                    { type: 'skin', value: 'radiation-skin', chance: 0.05, rarity: 'legendary' },
                     { type: 'crystals', value: 500, chance: 0.35, rarity: 'epic' },
                     { type: 'coins', value: 500000, chance: 0.45, rarity: 'rare' },
                 ]},
                 { id: 'ghost', name: 'Ghost', price: 12000, rewards: [
-                    { type: 'skin', value: 'vortex-skin', chance: 0.10, rarity: 'legendary' },
-                    { type: 'background', value: 'matrix-bg', chance: 0.10, rarity: 'epic' },
+                    { type: 'skin', value: 'vortex-skin', chance: 0.15, rarity: 'legendary' },
+                    { type: 'background', value: 'matrix-bg', chance: 0.1, rarity: 'epic' },
                     { type: 'crystals', value: 750, chance: 0.35, rarity: 'epic' },
-                    { type: 'coins', value: 750000, chance: 0.45, rarity: 'rare' },
+                    { type: 'coins', value: 750000, chance: 0.4, rarity: 'rare' },
                 ]},
                 { id: 'omega_star', name: 'ØMĒĜÃ star', price: 25000, rewards: [
                     { type: 'rebirth', value: 1, chance: 0.01, rarity: 'mythic' },
                     { type: 'skin', value: 'crystalmania-skin', chance: 0.04, rarity: 'mythic' },
-                    { type: 'skin', value: 'blackhole-skin', chance: 0.10, rarity: 'legendary' },
-                    { type: 'background', value: 'space-nebula-bg', chance: 0.10, rarity: 'epic' },
+                    { type: 'skin', value: 'blackhole-skin', chance: 0.1, rarity: 'legendary' },
+                    { type: 'skin', value: 'radiation-skin', chance: 0.1, rarity: 'legendary' },
+                    { type: 'background', value: 'space-nebula-bg', chance: 0.1, rarity: 'epic' },
                     { type: 'crystals', value: 2500, chance: 0.25, rarity: 'legendary' },
-                    { type: 'coins', value: 1000000, chance: 0.50, rarity: 'rare' },
+                    { type: 'coins', value: 1000000, chance: 0.4, rarity: 'rare' },
                 ]}
             ];
             
@@ -1396,7 +1555,7 @@
                { id: 17, type: 'clicks', target: 50000, description: "Нажать 50.000 раз", rewardType: 'crystals', rewardAmount: 100 },
            ];
 
-           const promoCodes = { "FRESHSTART": { type: "coins", value: 1000, message: "Получено 1000 монет! Добро пожаловать!" }, "INEEDMONEY": { type: "coins", value: 50000, message: "Получено 50.000 монет! Удачи!" }, "CRYSTALINFECTION": { type: "crystals", value: 25, message: "Получено 25 кристаллов!" }, "IAMSUB": { type: "coins", value: 2500, message: "Спасибо за подписку! Получено 2.500 монет!" }, "500CRYSTALSECRETCODE": { type: "crystals", value: 500, message: "Найдено! Получено 500 кристаллов!" }, "ACTIVATEADMINPANNELCODETRUE": { type: "admin", message: "Админ-панель активирована!" }, "LUCKYDAY": { type: "crystals", value: 10, message: "Удачный день! +10 кристаллов." }, "BIGMONEY": { type: "coins", value: 100000, message: "Большой куш! +100,000 монет." }, "CRYSTALRUSH": { type: "crystals", value: 75, message: "Кристальная лихорадка! +75 кристаллов." }, "SECRETCODE2025": { type: "coins", value: 20250, message: "Секретный код найден! +20,250 монет." }, "HACKERMAN": { type: "coins", value: 77777, message: "Система взломана! +77,777 монет." }, };
+           const promoCodes = { "FRESHSTART": { type: "coins", value: 1000, message: "Получено 1000 монет! Добро пожаловать!" }, "INEEDMONEY": { type: "coins", value: 50000, message: "Получено 50.000 монет! Удачи!" }, "CRYSTALINFECTION": { type: "crystals", value: 25, message: "Получено 25 кристаллов!" }, "IAMSUB": { type: "coins", value: 2500, message: "Спасибо за подписку! Получено 2.500 монет!" }, "500CRYSTALSECRETCODE": { type: "crystals", value: 500, message: "Найдено! Получено 500 кристаллов!" }, "ACTIVATEADMINPANNELCODETRUE": { type: "admin", message: "Админ-панель активирована!" }, "LUCKYDAY": { type: "crystals", value: 10, message: "Удачный день! +10 кристаллов." }, "BIGMONEY": { type: "coins", value: 100000, message: "Большой куш! +100,000 монет." }, "CRYSTALRUSH": { type: "crystals", value: 75, message: "Кристальная лихорадка! +75 кристаллов." }, "SECRETCODE2025": { type: "coins", value: 20250, message: "Секретный код найден! +20,250 монет." }, "HACKERMAN": { type: "coins", value: 77777, message: "Система взломана! +77,777 монет." }, "50KSECRETCRYSTALS": { type: 'crystals', value: 50000, message: 'Секрет найден! +50,000 кристаллов!' }, "OMEGASTARCASE": { type: 'case', value: 'omega_star', message: 'Секрет найден! Вы получили кейс ØMĒĜÃ star!' }, "BOXSECRET": { type: 'box', value: 1, message: 'Секрет найден! Вы получили Коробку с кейсами!' } };
            
            function loadGameData() {
                coins = parseFloat(localStorage.getItem('doolcoins')) || 0;
@@ -1404,6 +1563,7 @@
                currentTheme = localStorage.getItem('theme') || 'dark';
                autoThemeEnabled = localStorage.getItem('autoThemeEnabled') === 'true';
                antiLagEnabled = localStorage.getItem('antiLagEnabled') === 'true';
+               quickOpeningEnabled = localStorage.getItem('quickOpeningEnabled') === 'true';
                idChanged = localStorage.getItem('idChanged') === 'true';
                currentSkin = localStorage.getItem('skin') || 'default-skin';
                ownedSkins = JSON.parse(localStorage.getItem('ownedSkins')) || ['default-skin'];
@@ -1476,6 +1636,7 @@
            function updateSettingsButtons() {
                 antiLagToggleBtn.classList.toggle('active', antiLagEnabled);
                 autoThemeToggleBtn.classList.toggle('active', autoThemeEnabled);
+                quickOpeningToggleBtn.classList.toggle('active', quickOpeningEnabled);
                 if (idChanged) {
                     changeIdBtn.disabled = true;
                     changeIdBtn.textContent = 'ID изменен';
@@ -1515,6 +1676,13 @@
                localStorage.setItem('antiLagEnabled', antiLagEnabled);
                antiLagToggleBtn.classList.toggle('active', antiLagEnabled);
                showToast(`Анти-лаг режим ${antiLagEnabled ? 'включен' : 'отключен'}`, 'info');
+           }
+
+           function toggleQuickOpening() {
+               quickOpeningEnabled = !quickOpeningEnabled;
+               localStorage.setItem('quickOpeningEnabled', quickOpeningEnabled);
+               quickOpeningToggleBtn.classList.toggle('active', quickOpeningEnabled);
+               showToast(`Быстрое открытие ${quickOpeningEnabled ? 'включено' : 'отключено'}`, 'info');
            }
 
            function updateAutoThemeButtonState() {
@@ -1588,6 +1756,7 @@
                localStorage.setItem('usedCipherCodes', JSON.stringify(usedCipherCodes));
                localStorage.setItem('rebirthLevel', rebirthLevel);
                localStorage.setItem('antiLagEnabled', antiLagEnabled);
+               localStorage.setItem('quickOpeningEnabled', quickOpeningEnabled);
                localStorage.setItem('idChanged', idChanged);
            }
 
@@ -1626,8 +1795,7 @@
            
            function applyBackground(bgName) {
                document.body.className = ''; 
-               backgroundContainer.innerHTML = '';
-               if (fireflyInterval) { clearInterval(fireflyInterval); document.querySelectorAll('.firefly').forEach(fly => fly.remove()); }
+               if (document.body.fireflyInterval) { clearInterval(document.body.fireflyInterval); document.querySelectorAll('.firefly').forEach(fly => fly.remove()); }
                
                document.body.classList.add(bgName);
 
@@ -1645,7 +1813,9 @@
                    autoThemeToggleBtn.disabled = true;
                }
                
-               if (bgName === 'magic-forest-bg') fireflyInterval = setInterval(createFirefly, 300);
+               if (bgName === 'magic-forest-bg') {
+                   document.body.fireflyInterval = setInterval(createFirefly, 300);
+               }
                
                currentBackground = bgName;
                localStorage.setItem('background', currentBackground);
@@ -1653,32 +1823,43 @@
                updateAutoThemeButtonState();
            }
            
-           function createFirefly() { const fly = document.createElement('div'); fly.className = 'firefly'; const duration = Math.random() * 5 + 5; const delay = Math.random() * 5; fly.style.top = `${Math.random() * 100}%`; fly.style.animationDuration = `${duration}s`; fly.style.animationDelay = `${delay}s`; fly.style.setProperty('--y-end', `${(Math.random() - 0.5) * 20}vh`); document.body.appendChild(fly); setTimeout(() => fly.remove(), (duration + delay) * 1000); }
+           function createFirefly() { 
+               const fly = document.createElement('div'); 
+               fly.className = 'firefly'; 
+               const duration = Math.random() * 5 + 5; 
+               const delay = Math.random() * 5; 
+               fly.style.top = `${Math.random() * 100}%`; 
+               fly.style.animationDuration = `${duration}s`; 
+               fly.style.animationDelay = `${delay}s`; 
+               fly.style.setProperty('--y-end', `${(Math.random() - 0.5) * 20}vh`); 
+               document.body.appendChild(fly); 
+               setTimeout(() => fly.remove(), (duration + delay) * 1000); 
+           }
 
            function fillShopTabs() {
                skinsTab.innerHTML = `
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Стандартный</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-skin-id="default-skin"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Премиум</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-skin-id="premium-skin"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Легендарный</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-skin-id="legendary-skin"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Черная дыра</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-skin-id="blackhole-skin"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">CrystalMania</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-skin-id="crystalmania-skin"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Водоворот</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-skin-id="vortex-skin"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Glitch</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-skin-id="glitch-skin"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Океан</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-skin-id="ocean-skin"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Хакер</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-skin-id="hacker-skin"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Радиация</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-skin-id="radiation-skin"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Космический разлом</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-skin-id="cosmic-rift-skin"></button></div></div>`;
+                   <div class="shop-item"><div class="item-name">Стандартный</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="default-skin">👁️</button><button class="buy-btn" data-skin-id="default-skin"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Премиум</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="premium-skin">👁️</button><button class="buy-btn" data-skin-id="premium-skin"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Легендарный</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="legendary-skin">👁️</button><button class="buy-btn" data-skin-id="legendary-skin"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Черная дыра</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="blackhole-skin">👁️</button><button class="buy-btn" data-skin-id="blackhole-skin"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">CrystalMania</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="crystalmania-skin">👁️</button><button class="buy-btn" data-skin-id="crystalmania-skin"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Водоворот</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="vortex-skin">👁️</button><button class="buy-btn" data-skin-id="vortex-skin"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Glitch</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="glitch-skin">👁️</button><button class="buy-btn" data-skin-id="glitch-skin"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Океан</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="ocean-skin">👁️</button><button class="buy-btn" data-skin-id="ocean-skin"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Хакер</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="hacker-skin">👁️</button><button class="buy-btn" data-skin-id="hacker-skin"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Радиация</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="radiation-skin">👁️</button><button class="buy-btn" data-skin-id="radiation-skin"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Космический разлом</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="cosmic-rift-skin">👁️</button><button class="buy-btn" data-skin-id="cosmic-rift-skin"></button></div></div></div>`;
                boostsTab.innerHTML = `
                    <div class="shop-item"><div class="item-info"><div class="item-name">Множитель x2</div></div><div class="item-actions"><div class="item-price">500 <span>Đ</span></div><button class="buy-btn" id="multiplierBoostBtn">Купить</button></div></div>
                    <div class="shop-item"><div class="item-info"><div class="item-name">Удача +30%</div></div><div class="item-actions"><div class="item-price">300 <span>Đ</span></div><button class="buy-btn" id="luckBoostBtn">Купить</button></div></div>
                    <div class="shop-item"><div class="item-info"><div class="item-name">Автокликер</div></div><div class="item-actions"><div class="item-price">400 <span>Đ</span></div><button class="buy-btn" id="autoclickerBoostBtn">Купить</button></div></div>`;
                backgroundsTab.innerHTML = `
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Стандартный</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-bg-id="default-bg"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Космическая туманность</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-bg-id="space-nebula-bg"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Матрица</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-bg-id="matrix-bg"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Волшебный лес</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-bg-id="magic-forest-bg"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Жидкие волны</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-bg-id="liquid-waves-bg"></button></div></div>
-                   <div class="shop-item"><div class="item-info"><div class="item-name">Кибер-сетка</div></div><div class="item-actions"><div class="item-price"></div><button class="buy-btn" data-bg-id="cyber-grid-bg"></button></div></div>`;
+                   <div class="shop-item"><div class="item-name">Стандартный</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="bg" data-preview-id="default-bg">👁️</button><button class="buy-btn" data-bg-id="default-bg"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Космическая туманность</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="bg" data-preview-id="space-nebula-bg">👁️</button><button class="buy-btn" data-bg-id="space-nebula-bg"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Матрица</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="bg" data-preview-id="matrix-bg">👁️</button><button class="buy-btn" data-bg-id="matrix-bg"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Волшебный лес</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="bg" data-preview-id="magic-forest-bg">👁️</button><button class="buy-btn" data-bg-id="magic-forest-bg"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Жидкие волны</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="bg" data-preview-id="liquid-waves-bg">👁️</button><button class="buy-btn" data-bg-id="liquid-waves-bg"></button></div></div></div>
+                   <div class="shop-item"><div class="item-name">Кибер-сетка</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="bg" data-preview-id="cyber-grid-bg">👁️</button><button class="buy-btn" data-bg-id="cyber-grid-bg"></button></div></div></div>`;
                 fillCasesTab();
            }
 
@@ -1720,7 +1901,7 @@
 
             const shopItems = {
                 skins: [
-                    { id: 'default-skin' }, { id: 'premium-skin', price: 100, currency: 'crystals' }, { id: 'legendary-skin', price: 500, currency: 'crystals' }, { id: 'blackhole-skin', price: 1000, currency: 'crystals' }, { id: 'crystalmania-skin' }, { id: 'vortex-skin', price: 10000, currency: 'coins' }, { id: 'glitch-skin', price: 2500, currency: 'crystals' }, { id: 'ocean-skin', price: 4000, currency: 'crystals' }, { id: 'hacker-skin', price: 20000, currency: 'coins' }, { id: 'radiation-skin', price: 7500, currency: 'crystals' }, { id: 'cosmic-rift-skin', price: 750000, currency: 'coins' },
+                    { id: 'default-skin' }, { id: 'premium-skin', price: 100, currency: 'crystals' }, { id: 'legendary-skin', price: 500, currency: 'crystals' }, { id: 'blackhole-skin', price: 1000, currency: 'crystals' }, { id: 'crystalmania-skin' }, { id: 'vortex-skin', price: 10000, currency: 'coins' }, { id: 'glitch-skin', price: 2500, currency: 'crystals' }, { id: 'ocean-skin', price: 4000, currency: 'crystals' }, { id: 'hacker-skin', price: 20000, currency: 'coins' }, { id: 'radiation-skin', price: 7500, currency: 'crystals' }, { id: 'cosmic-rift-skin', price: 7500, currency: 'crystals' },
                 ],
                 backgrounds: [
                     { id: 'default-bg' }, { id: 'space-nebula-bg', price: 25000, currency: 'coins' }, { id: 'matrix-bg', price: 1000, currency: 'crystals' }, { id: 'magic-forest-bg', price: 40000, currency: 'coins' }, { id: 'liquid-waves-bg', price: 2500, currency: 'crystals' }, { id: 'cyber-grid-bg', price: 5000, currency: 'crystals' },
@@ -1751,9 +1932,13 @@
                    
                    const shopItemDiv = btn.closest('.shop-item');
                    const priceDiv = shopItemDiv.querySelector('.item-price');
+                   const buyBtnGroup = btn.closest('.item-button-group');
+                   const previewBtn = buyBtnGroup.querySelector('.preview-btn');
 
                    if (ownedItems.includes(item.id)) {
-                       if (priceDiv) priceDiv.innerHTML = '';
+                       if (priceDiv) {
+                           priceDiv.innerHTML = `<span style="color: var(--success-color); font-weight: bold;">Куплено</span>`;
+                       }
                        if (currentItem === item.id) {
                            btn.textContent = 'Выбрано';
                            btn.disabled = true;
@@ -1852,6 +2037,57 @@
                });
            }
 
+           function createTapEffect(event, skin, targetElement) {
+                if (!targetElement) return;
+                const rect = targetElement.getBoundingClientRect();
+                const clickX = event.clientX - rect.left;
+                const clickY = event.clientY - rect.top;
+
+                if (antiLagEnabled) return;
+
+                let tapEffect;
+                switch(skin) {
+                    case 'cosmic-rift-skin':
+                        for (let i = 0; i < 10; i++) {
+                            const star = document.createElement('div');
+                            star.className = 'cosmic-rift-tap-effect';
+                            const angle = Math.random() * Math.PI * 2;
+                            const radius = Math.random() * (rect.width / 2.5);
+                            star.style.left = `${clickX + Math.cos(angle) * radius - 2}px`;
+                            star.style.top = `${clickY + Math.sin(angle) * radius - 2}px`;
+                            star.style.animationDelay = `${Math.random() * 0.2}s`;
+                            targetElement.appendChild(star);
+                            setTimeout(() => star.remove(), 800);
+                        }
+                        return;
+                    case 'legendary-skin':
+                         for (let i = 0; i < 7; i++) { const spark = document.createElement('div'); spark.classList.add('legendary-tap-effect'); spark.style.left = `${clickX - 4}px`; spark.style.top = `${clickY - 4}px`; const angle = Math.random() * Math.PI * 2; const distance = Math.random() * 100 + 40; spark.style.setProperty('--spark-x', `${Math.cos(angle) * distance}px`); spark.style.setProperty('--spark-y', `${Math.sin(angle) * distance}px`); targetElement.appendChild(spark); setTimeout(() => spark.remove(), 800); }
+                         return;
+                    case 'blackhole-skin': tapEffect = document.createElement('div'); tapEffect.classList.add('blackhole-tap-effect'); tapEffect.style.left = `${clickX}px`; tapEffect.style.top = `${clickY}px`; break;
+                    case 'crystalmania-skin': for (let i = 0; i < 6; i++) { const shard = document.createElement('div'); shard.classList.add('crystalmania-tap-effect'); shard.style.left = `${clickX - 7.5}px`; shard.style.top = `${clickY - 7.5}px`; shard.style.borderColor = `hsl(${Math.random() * 360}, 100%, 70%)`; shard.style.setProperty('--rot-end', `${(Math.random() - 0.5) * 720}deg`); targetElement.appendChild(shard); setTimeout(()=> shard.remove(), 700); } return;
+                    case 'vortex-skin': tapEffect = document.createElement('div'); tapEffect.classList.add('vortex-tap-effect'); tapEffect.style.left = `${clickX - 5}px`; tapEffect.style.top = `${clickY - 5}px`; break;
+                    case 'glitch-skin':
+                        ['a', 'b', 'c'].forEach(cls => {
+                           const bar = document.createElement('div');
+                           bar.classList.add('glitch-aura-effect', cls);
+                           bar.style.left = `${event.clientX - 75}px`;
+                           bar.style.top = `${event.clientY - 1.5 + (Math.random() - 0.5) * 40}px`;
+                           bar.style.setProperty('--x-end', `${(Math.random() - 0.5) * 50}px`);
+                           document.body.appendChild(bar);
+                           setTimeout(() => bar.remove(), 400);
+                       });
+                       return;
+                    case 'radiation-skin': tapEffect = document.createElement('div'); tapEffect.classList.add('radiation-tap-effect'); tapEffect.style.left = `${clickX - 5}px`; tapEffect.style.top = `${clickY - 5}px`; break;
+                    case 'ocean-skin': tapEffect = document.createElement('div'); tapEffect.classList.add('ocean-tap-effect'); tapEffect.style.left = `${clickX - 5}px`; tapEffect.style.top = `${clickY - 5}px`; break;
+                    case 'hacker-skin': for (let i = 0; i < 5; i++) { tapEffect = document.createElement('div'); tapEffect.classList.add('hacker-tap-effect'); tapEffect.style.left = `${clickX - 5}px`; tapEffect.style.top = `${clickY - 5}px`; const angle = Math.random() * Math.PI * 2; const distance = Math.random() * 80 + 20; tapEffect.style.setProperty('--spark-x', `${Math.cos(angle) * distance}px`); tapEffect.style.setProperty('--spark-y', `${Math.sin(angle) * distance}px`); targetElement.appendChild(tapEffect); setTimeout(() => tapEffect.remove(), 1000); } return;
+                    default: tapEffect = document.createElement('div'); tapEffect.classList.add('tap-effect'); tapEffect.style.setProperty('--tap-x', `${clickX}px`); tapEffect.style.setProperty('--tap-y', `${clickY}px`); break;
+                }
+                if (tapEffect) {
+                    targetElement.appendChild(tapEffect);
+                    tapEffect.addEventListener('animationend', () => tapEffect.remove());
+                }
+            }
+
            function handleCircleClick(event) {
                const clickValue = (1 + rebirthLevel) * coinMultiplier;
                updateQuestProgress('clicks', 1); 
@@ -1867,33 +2103,7 @@
                saveGameData(); 
                updateUI(); 
                checkAutoclicker(event.timeStamp);
-               
-               if(antiLagEnabled) return;
-
-               const circleRect = circle.getBoundingClientRect(); const clickX = event.clientX - circleRect.left; const clickY = event.clientY - circleRect.top;
-               let tapEffect;
-               switch (currentSkin) {
-                   case 'radiation-skin': tapEffect = document.createElement('div'); tapEffect.classList.add('radiation-tap-effect'); tapEffect.style.left = `${clickX - 5}px`; tapEffect.style.top = `${clickY - 5}px`; circle.appendChild(tapEffect); break;
-                   case 'ocean-skin': tapEffect = document.createElement('div'); tapEffect.classList.add('ocean-tap-effect'); tapEffect.style.left = `${clickX - 5}px`; tapEffect.style.top = `${clickY - 5}px`; circle.appendChild(tapEffect); break;
-                   case 'hacker-skin': for (let i = 0; i < 5; i++) { tapEffect = document.createElement('div'); tapEffect.classList.add('hacker-tap-effect'); tapEffect.style.left = `${clickX - 5}px`; tapEffect.style.top = `${clickY - 5}px`; const angle = Math.random() * Math.PI * 2; const distance = Math.random() * 80 + 20; tapEffect.style.setProperty('--spark-x', `${Math.cos(angle) * distance}px`); tapEffect.style.setProperty('--spark-y', `${Math.sin(angle) * distance}px`); circle.appendChild(tapEffect); setTimeout(() => tapEffect.remove(), 1000); } break;
-                   case 'legendary-skin': for (let i = 0; i < 7; i++) { const spark = document.createElement('div'); spark.classList.add('legendary-tap-effect'); spark.style.left = `${clickX - 4}px`; spark.style.top = `${clickY - 4}px`; const angle = Math.random() * Math.PI * 2; const distance = Math.random() * 100 + 40; spark.style.setProperty('--spark-x', `${Math.cos(angle) * distance}px`); spark.style.setProperty('--spark-y', `${Math.sin(angle) * distance}px`); circle.appendChild(spark); setTimeout(() => spark.remove(), 800); } break;
-                   case 'blackhole-skin': tapEffect = document.createElement('div'); tapEffect.classList.add('blackhole-tap-effect'); tapEffect.style.left = `${clickX}px`; tapEffect.style.top = `${clickY}px`; circle.appendChild(tapEffect); break;
-                   case 'crystalmania-skin': for (let i = 0; i < 6; i++) { const shard = document.createElement('div'); shard.classList.add('crystalmania-tap-effect'); shard.style.left = `${clickX - 7.5}px`; shard.style.top = `${clickY - 7.5}px`; shard.style.borderColor = `hsl(${Math.random() * 360}, 100%, 70%)`; shard.style.setProperty('--rot-end', `${(Math.random() - 0.5) * 720}deg`); circle.appendChild(shard); setTimeout(()=> shard.remove(), 700); } break;
-                   case 'vortex-skin': tapEffect = document.createElement('div'); tapEffect.classList.add('vortex-tap-effect'); tapEffect.style.left = `${clickX - 5}px`; tapEffect.style.top = `${clickY - 5}px`; circle.appendChild(tapEffect); break;
-                   case 'glitch-skin': 
-                       ['a', 'b', 'c'].forEach(cls => { 
-                           const bar = document.createElement('div'); 
-                           bar.classList.add('glitch-aura-effect', cls); 
-                           bar.style.left = `${event.clientX - 75}px`;
-                           bar.style.top = `${event.clientY - 1.5 + (Math.random() - 0.5) * 40}px`;
-                           bar.style.setProperty('--x-end', `${(Math.random() - 0.5) * 50}px`);
-                           document.body.appendChild(bar);
-                           setTimeout(() => bar.remove(), 400); 
-                       }); 
-                       break;
-                   default: tapEffect = document.createElement('div'); tapEffect.classList.add('tap-effect'); tapEffect.style.setProperty('--tap-x', `${clickX}px`); tapEffect.style.setProperty('--tap-y', `${clickY}px`); circle.appendChild(tapEffect); break;
-               }
-               if (tapEffect && tapEffect.parentNode) tapEffect.addEventListener('animationend', () => tapEffect.remove());
+               createTapEffect(event, currentSkin, circle);
            }
 
            function handleGlitchLongPressStart() {
@@ -2024,6 +2234,7 @@
             }
 
             function grantReward(reward) {
+                if (!reward) return;
                 let message = '';
                 switch (reward.type) {
                     case 'coins':
@@ -2056,6 +2267,18 @@
                         rebirthLevel += reward.value;
                         message = `НЕВЕРОЯТНО! Вы получили уровень перерождения!`;
                         break;
+                    case 'case':
+                        const caseToOpen = cases.find(c => c.id === reward.value);
+                        if (caseToOpen) {
+                            message = `Из промокода выпал кейс "${caseToOpen.name}"! Открываем...`;
+                            setTimeout(() => startCaseOpeningAnimation(caseToOpen), 500);
+                        }
+                        break;
+                    case 'box':
+                         const randomCase = cases[Math.floor(Math.random() * cases.length)];
+                         message = `Из промокода выпала коробка! Открываем...`;
+                         setTimeout(() => startBoxOpeningAnimation(randomCase), 500);
+                        break;
                 }
                 showToast(message, 'success');
                 saveGameData();
@@ -2063,8 +2286,11 @@
             }
 
             function handleCaseOrViewClick(e) {
-                if (e.target.matches('.buy-btn[data-case-id]')) {
-                    const caseId = e.target.dataset.caseId;
+                const target = e.target.closest('button');
+                if (!target) return;
+
+                if (target.matches('.buy-btn[data-case-id]')) {
+                    const caseId = target.dataset.caseId;
                     const caseItem = cases.find(c => c.id === caseId);
                     if (caseItem && crystals >= caseItem.price) {
                         crystals -= caseItem.price;
@@ -2076,7 +2302,7 @@
                     } else {
                         showToast('Недостаточно кристаллов!', 'error');
                     }
-                } else if (e.target.matches('#buyCaseBoxBtn')) {
+                } else if (target.matches('#buyCaseBoxBtn')) {
                     if (crystals >= caseBoxPrice) {
                         crystals -= caseBoxPrice;
                         updateQuestProgress('crystalsSpent', caseBoxPrice);
@@ -2088,10 +2314,45 @@
                     } else {
                         showToast('Недостаточно кристаллов!', 'error');
                     }
-                } else if (e.target.matches('.view-case-btn')) {
-                    const caseId = e.target.dataset.caseId;
+                } else if (target.matches('.view-case-btn')) {
+                    const caseId = target.dataset.caseId;
                     showCaseContents(caseId);
+                } else if (target.matches('.preview-btn')) {
+                    const type = target.dataset.previewType;
+                    const id = target.dataset.previewId;
+                    showPreview(type, id);
                 }
+            }
+
+            function showPreview(type, id) {
+                previewContent.innerHTML = '';
+                previewContent.className = 'preview-content'; // Reset classes
+
+                if (type === 'skin') {
+                    const skinName = getSkinName(id);
+                    previewTitle.textContent = `Скин: ${skinName}`;
+                    const previewCircle = document.createElement('div');
+                    previewCircle.className = `circle preview-circle ${id}`;
+                    previewContent.appendChild(previewCircle);
+                } else if (type === 'bg') {
+                    const bgName = getBackgroundName(id);
+                    previewTitle.textContent = `Фон: ${bgName}`;
+                    previewContent.classList.add(id);
+                    if (id === 'magic-forest-bg') {
+                        for (let i = 0; i < 5; i++) {
+                            const fly = document.createElement('div');
+                            fly.className = 'firefly';
+                            fly.style.position = 'absolute'; // Keep inside container
+                            const duration = Math.random() * 5 + 5;
+                            const delay = Math.random() * 5;
+                            fly.style.top = `${Math.random() * 100}%`;
+                            fly.style.animation = `firefly-float ${duration}s ${delay}s linear infinite`;
+                            fly.style.setProperty('--y-end', `${(Math.random() - 0.5) * 20}vh`);
+                            previewContent.appendChild(fly);
+                        }
+                    }
+                }
+                showModal(previewModal);
             }
 
             function showCaseContents(caseId) {
@@ -2130,68 +2391,83 @@
             }
             
             function startBoxOpeningAnimation(wonCase) {
+                if (isAnimationRunning) return;
+                isAnimationRunning = true;
+                currentAnimationReward = wonCase;
+
+                if (quickOpeningEnabled) {
+                    hideModal(boxAnimationOverlay);
+                    showToast(`Вам выпал кейс "${wonCase.name}"! Открываем...`, 'success');
+                    setTimeout(() => startCaseOpeningAnimation(wonCase), 100);
+                    isAnimationRunning = false;
+                    return;
+                }
+                
                 boxOpeningContainer.style.display = 'flex';
                 revealedCaseContainer.style.display = 'none';
-                closeBoxAnimationBtn.classList.remove('visible');
+                boxResultContainer.classList.remove('visible');
+                skipBoxBtn.style.display = 'block';
                 openingBoxImage.style.animation = 'none';
                 void openingBoxImage.offsetWidth; 
                 openingBoxImage.style.animation = 'box-shake 1s 0.5s';
                 
                 showModal(boxAnimationOverlay);
                 
-                setTimeout(() => {
+                boxTimeoutId = setTimeout(() => {
                     boxOpeningContainer.style.display = 'none';
                     revealedCaseContainer.style.display = 'block';
                     revealedCaseImage.src = caseImages[wonCase.id];
                     revealedCaseName.textContent = wonCase.name;
                     revealedCaseName.style.color = '#ffb300';
                     revealedCaseImage.style.setProperty('--glow-color', '#ffb300');
-                    
-                    closeBoxAnimationBtn.onclick = () => {
-                        hideModal(boxAnimationOverlay);
-                        startCaseOpeningAnimation(wonCase);
-                    };
-                    closeBoxAnimationBtn.classList.add('visible');
+                    skipBoxBtn.style.display = 'none';
+                    isAnimationRunning = false;
+                    boxResultContainer.classList.add('visible');
                 }, 2000);
             }
 
             function startCaseOpeningAnimation(caseItem) {
+                if(isAnimationRunning) return;
+                isAnimationRunning = true;
                 const actualReward = getWeightedRandomReward(caseItem.rewards);
+                currentAnimationReward = actualReward;
                 
+                if (quickOpeningEnabled) {
+                    hideModal(caseAnimationOverlay);
+                    grantReward(actualReward);
+                    isAnimationRunning = false;
+                    return;
+                }
+
                 prizeReel.innerHTML = '';
                 prizeReel.style.transition = 'none';
                 prizeReel.style.transform = `translateX(0px)`;
                 reelContainer.style.display = 'block';
                 wonPrizeContainer.style.display = 'none';
-                closeAnimationBtn.classList.remove('visible');
+                caseResultContainer.classList.remove('visible');
+                skipCaseBtn.style.display = 'block';
 
                 const reelItems = [];
-                for (let i = 0; i < 50; i++) {
-                    reelItems.push(caseItem.rewards[Math.floor(Math.random() * caseItem.rewards.length)]);
-                }
-                const winIndex = 45; 
-                reelItems[winIndex] = actualReward;
-
-                reelItems.forEach(item => {
-                    prizeReel.appendChild(createReelItemElement(item));
-                });
+                for (let i = 0; i < 50; i++) { reelItems.push(caseItem.rewards[Math.floor(Math.random() * caseItem.rewards.length)]); }
+                reelItems[45] = actualReward;
+                reelItems.forEach(item => prizeReel.appendChild(createReelItemElement(item)));
                 
                 showModal(caseAnimationOverlay);
                 
-                const itemWidth = 120;
-                const containerWidth = reelContainer.offsetWidth;
-                const targetPosition = (winIndex * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
-                const randomOffset = (Math.random() - 0.5) * (itemWidth * 0.6);
+                caseTransitionEndHandler = () => {
+                    displayFinalPrize(actualReward);
+                    grantReward(actualReward);
+                    isAnimationRunning = false;
+                };
+                prizeReel.addEventListener('transitionend', caseTransitionEndHandler, { once: true });
                 
                 setTimeout(() => {
+                    const itemWidth = 120, containerWidth = reelContainer.offsetWidth;
+                    const targetPosition = (45 * itemWidth) - (containerWidth / 2) + (itemWidth / 2);
+                    const randomOffset = (Math.random() - 0.5) * (itemWidth * 0.6);
                     prizeReel.style.transition = 'transform 5s cubic-bezier(0.2, 0.8, 0.25, 1)';
                     prizeReel.style.transform = `translateX(-${targetPosition + randomOffset}px)`;
                 }, 100);
-
-                prizeReel.addEventListener('transitionend', () => {
-                    displayFinalPrize(actualReward);
-                    grantReward(actualReward);
-                }, { once: true });
             }
 
             function getSkinName(id) {
@@ -2216,26 +2492,11 @@
                 let name = '', innerHTML = '';
 
                 switch (item.type) {
-                    case 'coins':
-                        name = `${formatNumber(item.value)} Đ`;
-                        innerHTML = `<div class="item-icon">Đ</div>`;
-                        break;
-                    case 'crystals':
-                        name = `${formatNumber(item.value)} ✦`;
-                        innerHTML = `<div class="item-icon">✦</div>`;
-                        break;
-                    case 'skin':
-                        name = getSkinName(item.value);
-                        innerHTML = `<div class="item-icon">🎨</div>`;
-                        break;
-                    case 'background':
-                        name = getBackgroundName(item.value);
-                        innerHTML = `<div class="item-icon">🖼️</div>`;
-                        break;
-                    case 'rebirth':
-                        name = 'Перерождение!';
-                        innerHTML = `<div class="item-icon">🔄</div>`;
-                        break;
+                    case 'coins': name = `${formatNumber(item.value)} Đ`; innerHTML = `<div class="item-icon">Đ</div>`; break;
+                    case 'crystals': name = `${formatNumber(item.value)} ✦`; innerHTML = `<div class="item-icon">✦</div>`; break;
+                    case 'skin': name = getSkinName(item.value); innerHTML = `<div class="item-icon">🎨</div>`; break;
+                    case 'background': name = getBackgroundName(item.value); innerHTML = `<div class="item-icon">🖼️</div>`; break;
+                    case 'rebirth': name = 'Перерождение!'; innerHTML = `<div class="item-icon">🔄</div>`; break;
                 }
                 
                 element.innerHTML = `${innerHTML}<div class="reel-item-name">${name}</div>`;
@@ -2251,30 +2512,16 @@
                 const glowColor = rarityColors[reward.rarity || 'common'];
                 
                  switch (reward.type) {
-                    case 'coins':
-                        name = `${formatNumber(reward.value)} Монет`;
-                        wonPrizeIcon.textContent = 'Đ';
-                        break;
-                    case 'crystals':
-                        name = `${formatNumber(reward.value)} Кристаллов`;
-                        wonPrizeIcon.textContent = '✦';
-                        break;
-                    case 'skin':
-                        name = getSkinName(reward.value);
-                        wonPrizeIcon.textContent = '🎨';
-                        break;
-                    case 'background':
-                        name = getBackgroundName(reward.value);
-                        wonPrizeIcon.textContent = '🖼️';
-                        break;
-                    case 'rebirth':
-                        name = 'УРОВЕНЬ ПЕРЕРОЖДЕНИЯ!';
-                        wonPrizeIcon.textContent = '🔄';
-                        break;
+                    case 'coins': name = `${formatNumber(reward.value)} Монет`; wonPrizeIcon.textContent = 'Đ'; break;
+                    case 'crystals': name = `${formatNumber(reward.value)} Кристаллов`; wonPrizeIcon.textContent = '✦'; break;
+                    case 'skin': name = getSkinName(reward.value); wonPrizeIcon.textContent = '🎨'; break;
+                    case 'background': name = getBackgroundName(reward.value); wonPrizeIcon.textContent = '🖼️'; break;
+                    case 'rebirth': name = 'УРОВЕНЬ ПЕРЕРОЖДЕНИЯ!'; wonPrizeIcon.textContent = '🔄'; break;
                 }
                 
                 reelContainer.style.display = 'none';
                 wonPrizeContainer.style.display = 'flex';
+                skipCaseBtn.style.display = 'none';
                 
                 wonPrizeName.textContent = name;
                 wonPrizeName.style.color = glowColor;
@@ -2282,7 +2529,7 @@
                 wonPrizeIcon.style.setProperty('--glow-color', glowColor);
 
                 setTimeout(() => {
-                    closeAnimationBtn.classList.add('visible');
+                    caseResultContainer.classList.add('visible');
                 }, 500);
             }
 
@@ -2341,21 +2588,25 @@
                exchangeBtn: exchangeModal, 
                promocodeBtn: promocodeModal, 
                settingsBtn: settingsModal,
-               rebirthBtn: rebirthModal
+               rebirthBtn: rebirthModal,
+               changelogBtn: changelogModal
            };
            Object.entries(modalButtons).forEach(([btnId, modal]) => {
-               document.getElementById(btnId).addEventListener('click', () => {
-                   showModal(modal);
-                   if (modal === shop) updateUI();
-                   if (modal === questsModal) { renderQuests(); updateUI(); }
-                   if (modal === exchangeModal) { exchangeInput.value = ''; exchangeSubmit.disabled = true; }
-                   if (modal === transferModal) { generatedCodeArea.value = ''; claimCodeInput.value = ''; }
-                   if (modal === settingsModal) {
-                       updatePlayTimeDisplay();
-                       updateSettingsButtons();
-                    }
-                   if (modal === rebirthModal) updateRebirthModal();
-               });
+                const btn = document.getElementById(btnId);
+                if (btn) {
+                   btn.addEventListener('click', () => {
+                       showModal(modal);
+                       if (modal === shop) updateUI();
+                       if (modal === questsModal) { renderQuests(); updateUI(); }
+                       if (modal === exchangeModal) { exchangeInput.value = ''; exchangeSubmit.disabled = true; }
+                       if (modal === transferModal) { generatedCodeArea.value = ''; claimCodeInput.value = ''; }
+                       if (modal === settingsModal) {
+                           updatePlayTimeDisplay();
+                           updateSettingsButtons();
+                        }
+                       if (modal === rebirthModal) updateRebirthModal();
+                   });
+                }
            });
 
            allModals.forEach(modal => {
@@ -2367,8 +2618,38 @@
            
            refreshQuestsBtn.addEventListener('click', () => generateNewQuests());
            rebirthBtnConfirm.addEventListener('click', performRebirth);
-           casesTab.addEventListener('click', handleCaseOrViewClick);
+           
+           [skinsTab, backgroundsTab, casesTab].forEach(tab => tab.addEventListener('click', handleCaseOrViewClick));
+            previewContent.addEventListener('click', (e) => {
+                const pCircle = previewContent.querySelector('.preview-circle');
+                if (pCircle) {
+                    const skinId = Array.from(pCircle.classList).find(c => c.endsWith('-skin'));
+                    if (skinId) createTapEffect(e, skinId, pCircle);
+                }
+            });
+            previewModal.querySelector('.close-modal').addEventListener('click', () => {
+                previewContent.innerHTML = '';
+                previewContent.className = 'preview-content';
+            });
+
            closeAnimationBtn.addEventListener('click', () => hideModal(caseAnimationOverlay));
+           skipCaseBtn.addEventListener('click', () => {
+                if(caseTransitionEndHandler) prizeReel.removeEventListener('transitionend', caseTransitionEndHandler);
+                hideModal(caseAnimationOverlay);
+                grantReward(currentAnimationReward);
+                isAnimationRunning = false;
+           });
+            closeBoxAnimationBtn.addEventListener('click', () => {
+                hideModal(boxAnimationOverlay);
+                startCaseOpeningAnimation(currentAnimationReward);
+            });
+           skipBoxBtn.addEventListener('click', () => {
+                if (boxTimeoutId) clearTimeout(boxTimeoutId);
+                hideModal(boxAnimationOverlay);
+                showToast(`Вам выпал кейс "${currentAnimationReward.name}"! Открываем...`, 'success');
+                setTimeout(() => startCaseOpeningAnimation(currentAnimationReward), 100);
+                isAnimationRunning = false;
+            });
            
            generateCodeBtn.addEventListener('click', () => {
                const recipientId = recipientIdInput.value.trim().toUpperCase();
@@ -2412,6 +2693,7 @@
 
            autoThemeToggleBtn.addEventListener('click', toggleAutoTheme);
            antiLagToggleBtn.addEventListener('click', toggleAntiLag);
+           quickOpeningToggleBtn.addEventListener('click', toggleQuickOpening);
            telegramBtn.addEventListener('click', () => window.open('https://t.me/D00lcoin', '_blank'));
 
            shopTabs.forEach(tab => { 
@@ -2446,9 +2728,10 @@
                const code = promocodeInput.value.trim().toUpperCase(); promocodeInput.value = '';
                if (promoCodes[code]) {
                    const promo = promoCodes[code];
+                   if (usedPromoCodes.includes(code)) { showToast('Промокод уже был использован.', 'error'); return; }
                    if (code === "ACTIVATEADMINPANNELCODETRUE") { showModal(adminPanel); showToast(promo.message, 'success'); return; }
-                   if (usedPromoCodes.includes(code)) { showToast('Промокод уже был использован.', 'error'); } 
-                   else { if (promo.type === 'coins') coins += promo.value; else if (promo.type === 'crystals') crystals += promo.value; usedPromoCodes.push(code); saveGameData(); updateUI(); showToast(promo.message, 'success'); }
+                   usedPromoCodes.push(code);
+                   grantReward(promo);
                } else { showToast('Неверный промокод.', 'error'); }
            });
 
@@ -2497,10 +2780,13 @@
             });
            fullResetBtn.addEventListener('click', () => { showConfirmation('ВЫ УВЕРЕНЫ? Это действие полностью сотрет весь ваш прогресс (монеты, скины, квесты и т.д.) и перезапустит игру. ОТМЕНИТЬ БУДЕТ НЕВОЗМОЖНО.', () => { localStorage.clear(); location.reload(); }); });
            cancelBtn.addEventListener('click', () => hideModal(confirmationModal));
+
+           // Secret promocode listeners
+           gameVersionElement.addEventListener('mousedown', () => { versionHoldTimer = setTimeout(() => { showToast('Секретный промокод: 50KSECRETCRYSTALS', 'info', 5000); }, 2000); });
+           ['mouseup', 'mouseleave', 'touchend'].forEach(evt => gameVersionElement.addEventListener(evt, () => clearTimeout(versionHoldTimer)));
            
            initializeGame();
        });
    </script>
 </body>
 </html>
-
