@@ -433,11 +433,11 @@
 
    <div id="toastContainer"></div>
    <div id="backgroundContainer"></div>
-   <div class="warning" id="warning">Слишком быстро! Прекратите кликать так часто!</div>
+   <div class="warning" id="warning">Слишком быстро кликаешь! щас отлетишь в бан!</div>
    <div class="ban-screen" id="banScreen">
-       <div>ВЫ ЗАБАНЕНЫ ЗА АВТОКЛИКЕР!</div>
+       <div>∅ВЫ ЗАБАНЕНЫ ЗА АВТОКЛИКЕР!∅</div>
        <div class="ban-timer" id="banTimer">60</div>
-       <div>Вам отняли половину монет!</div>
+       <div>Вам отняли половину монет!</div> <div>Нефиг читерить</div>
    </div>
 
     <div class="top-content-wrapper">
@@ -465,11 +465,11 @@
     </div>
 
    <div id="retractablePanel">
-       <div id="panelToggle"><span class="arrow">∆</span></div>
+       <div id="panelToggle"><span class="arrow">▲</span></div>
        <div id="buttonContainer">
            <button class="panel-btn" id="shopBtn">🛒</button>
            <button class="panel-btn" id="questsBtn">📜</button>
-           <button class="panel-btn" id="rebirthBtn">🔄</button>
+           <button class="panel-btn" id="rebirthBtn">♻️</button>
            <button class="panel-btn" id="transferBtn">✉️</button>
            <button class="panel-btn" id="exchangeBtn">💱</button>
            <button class="panel-btn" id="promocodeBtn">🎫</button>
@@ -501,7 +501,7 @@
     <div class="modal-overlay" id="eventShopModal">
        <div class="modal">
            <div class="modal-header">
-               <div class="modal-title">Магазин Сакуры 🛍️🌸</div>
+               <div class="modal-title">Магазин Сакуры 🌸</div>
                <div class="close-modal">✕</div>
            </div>
            <div class="modal-content shop-content" id="eventShopContent" style="display: flex; flex-direction: column; gap: 15px;">
@@ -544,7 +544,7 @@
    <div class="modal-overlay" id="transferModal">
        <div class="modal">
            <div class="modal-header">
-               <div class="modal-title">Шифр-коды</div>
+               <div class="modal-title">Отправка валют</div>
                <div class="close-modal">✕</div>
            </div>
            <div class="shop-tabs" id="transferTabs">
@@ -617,7 +617,7 @@
             </div>
             <div class="modal-content">
                 <div class="rebirth-info">
-                    Ваш текущий уровень перерождения: <span id="rebirthLevelDisplay">0</span>.
+                    Ваш текущий уровень перерождения: <span id="rebirthLevelDisplay">0</span>♻
                     <br>
                     Каждое перерождение сбрасывает ваш прогресс (монеты, кристаллы, скины и т.д.), но даёт постоянный бонус:
                     <br>
@@ -689,7 +689,7 @@
                </div>
                <div class="settings-actions">
                    <button class="settings-btn" id="copyIdBtn">Копировать ID</button>
-                   <button class="settings-btn" id="changeIdBtn">Сменить ID <br> (1 🔄)</button>
+                   <button class="settings-btn" id="changeIdBtn">Сменить ID <br> (1 ♻️)</button>
                    <button class="settings-toggle-btn" id="autoThemeToggleBtn">Auto-тема</button>
                    <button class="settings-toggle-btn" id="quickOpeningToggleBtn">Быстрое открытие</button>
                    <button class="settings-toggle-btn" id="antiLagToggleBtn">Анти-лаг</button>
@@ -709,11 +709,11 @@
            </div>
            <div class="modal-content">
                 <ul>
-                    <li>🌸 **Переработка ивента "Цветение Сакуры"!** 🌸</li>
-                    <li>Добавлено **Дерево Сакуры**, которое можно улучшать за очки сакуры для получения бонусов и уровней перерождения!</li>
-                    <li>Исправлена ошибка с расположением элементов интерфейса (счетчики валют и круг).</li>
-                    <li>Кейс Сакуры теперь стоит **1000 🌸** и содержит новые эксклюзивные награды: **уровни перерождения, скин "Сакура", фон "Сакура"** и другие ценные призы!</li>
-                    <li>Добавлен новый интерфейс для покупки Очков Сакуры за монеты (Đ).</li>
+                    <li>🌸 Переработка ивента "Цветение Сакуры"! 🌸</li>
+                    <li>Добавлено Дерево Сакуры, которое можно улучшать за очки сакуры для получения бонусов и уровней перерождения!</li>
+                    <li>Незначительно изменён интерфейс</li>
+                    <li>Кейс Сакуры теперь с другой текстурой </li>
+                    <li>скоро будет голосование менять ивент или нет</li>
                 </ul>
            </div>
        </div>
@@ -1009,12 +1009,12 @@
             };
             
             const caseImages = {
-                'nature': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/Nature%20chest.png',
-                'shiny': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/Shine%20chest.png',
-                'lightning': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/Lightning%20chest.png',
-                'molten': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/Molten%20chest.png',
+                'nature': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/nature2.png',
+                'shiny': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/shiny2.png',
+                'lightning': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/lightning2.png',
+                'molten': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/molten2.png',
                 'crazy': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/Crazy%20chest.png',
-                'ghost': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/Ghost%20chest.png',
+                'ghost': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/ghost2.png',
                 'omega_star': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/%C3%98M%C4%92%C4%9C%C3%83%20star%20chest.png',
                 'sakura_case': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/sakura.png'
             };
@@ -1525,7 +1525,7 @@
            function createSakuraEffect(x, y, text) { if (antiLagEnabled) return; const e = document.createElement('div'); e.className = 'sakura-effect'; e.innerHTML = text; e.style.left = `${x}px`; e.style.top = `${y}px`; document.body.appendChild(e); e.addEventListener('animationend', () => e.remove()); }
            function showWarning() { warning.style.display = 'block'; clearTimeout(warning.timeout); warning.timeout = setTimeout(() => { warning.style.display = 'none'; }, 2000); }
            function showBanScreen() {
-               banScreen.style.display = 'flex'; coins = Math.floor(coins / 2); saveGameData(); updateUI(); let timeLeft = 60; banTimer.textContent = timeLeft; circle.removeEventListener('click', handleCircleClick);
+               banScreen.style.display = 'flex'; coins = Math.floor(coins / 2); saveGameData(); updateUI(); let timeLeft = 300; banTimer.textContent = timeLeft; circle.removeEventListener('click', handleCircleClick);
                clearInterval(banInterval); banInterval = setInterval(() => { timeLeft--; banTimer.textContent = timeLeft; if (timeLeft <= 0) { clearInterval(banInterval); banScreen.style.display = 'none'; circle.addEventListener('click', handleCircleClick); clickCount = 0; } }, 1000);
            }
 
@@ -1644,7 +1644,7 @@
                         case 'sakura_points': name = `${formatNumber(reward.value)} Очков Сакуры`; icon = '🌸'; break;
                         case 'skin': name = `Скин: "${getSkinName(reward.value)}"`; icon = '🎨'; break;
                         case 'background': name = `Фон: "${getBackgroundName(reward.value)}"`; icon = '🖼️'; break;
-                        case 'rebirth': name = `${reward.value} Ур. Перерождения`; icon = '🔄'; break;
+                        case 'rebirth': name = `${reward.value} Ур. Перерождения`; icon = '♻️'; break;
                         case 'box': name = `Коробка с кейсами`; icon = '📦'; break;
                     }
                     const rewardElement = document.createElement('div');
@@ -1713,7 +1713,7 @@
                     case 'sakura_points': name = `${formatNumber(item.value)} 🌸`; innerHTML = `<div class="item-icon">🌸</div>`; break;
                     case 'skin': name = getSkinName(item.value); innerHTML = `<div class="item-icon">🎨</div>`; break;
                     case 'background': name = getBackgroundName(item.value); innerHTML = `<div class="item-icon">🖼️</div>`; break;
-                    case 'rebirth': name = `${item.value} Перерожд.`; innerHTML = `<div class="item-icon">🔄</div>`; break;
+                    case 'rebirth': name = `${item.value} Перерожд.`; innerHTML = `<div class="item-icon">♻️</div>`; break;
                     case 'box': name = 'Коробка'; innerHTML = `<div class="item-icon">📦</div>`; break;
                 }
                 element.innerHTML = `${innerHTML}<div class="reel-item-name">${name}</div>`; return element;
@@ -1729,7 +1729,7 @@
                     case 'sakura_points': name = `${formatNumber(reward.value)} Очков Сакуры`; wonPrizeIcon.textContent = '🌸'; break;
                     case 'skin': name = getSkinName(reward.value); wonPrizeIcon.textContent = '🎨'; break;
                     case 'background': name = getBackgroundName(reward.value); wonPrizeIcon.textContent = '🖼️'; break;
-                    case 'rebirth': name = `${reward.value} УР. ПЕРЕРОЖДЕНИЯ!`; wonPrizeIcon.textContent = '🔄'; break;
+                    case 'rebirth': name = `${reward.value} УР. ПЕРЕРОЖДЕНИЯ!`; wonPrizeIcon.textContent = '♻️'; break;
                     case 'box': name = 'КОРОБКА С КЕЙСАМИ!'; wonPrizeIcon.textContent = '📦'; break;
                 }
                 reelContainer.style.display = 'none'; wonPrizeContainer.style.display = 'flex'; skipCaseBtn.style.display = 'none';
