@@ -1928,15 +1928,50 @@
            closeBoxAnimationBtn.addEventListener('click', () => { hideModal(boxAnimationOverlay); startCaseOpeningAnimation(currentAnimationReward); });
            skipBoxBtn.addEventListener('click', () => { if (boxTimeoutId) clearTimeout(boxTimeoutId); hideModal(boxAnimationOverlay); showToast(`Вам выпал кейс "${currentAnimationReward.name}"! Открываем...`, 'success'); setTimeout(() => startCaseOpeningAnimation(currentAnimationReward), 100); isAnimationRunning = false; });
            
-           generateCodeBtn.addEventListener('click', () => {
-               const recipientId = recipientIdInput.value.trim().toUpperCase(); const amount = parseInt(transferAmountInput.value); const currencyType = document.querySelector('input[name="currencyType"]:checked').value;
-               if (recipientId.length !== 9 || !/^[A-Z0-9]+$/.test(recipientId)) { showToast("ID получателя должен состоять из 9 букв и цифр.", 'error'); return; }
-               if (isNaN(amount) || amount <= 0) { showToast("Введите корректное количество.", 'error'); return; }
-               if (currencyType === 'COIN' && coins < amount) { showToast("Недостаточно монет.", 'error'); return; }
-               if (currencyType === 'CRYS' && crystals < amount) { showToast("Недостаточно кристаллов.", 'error'); return; }
-               const nonce = Date.now() + Math.floor(Math.random() * 10000000); const plaintext = `${nonce}x${amount}x${currencyType}x${recipientId}`;
-               generatedCodeArea.value = encrypt(plaintext); showToast("Шифр-код успешно сгенерирован!", 'success');
-           });
+ generateCodeBtn.addEventListener('click', () => {
+    const recipientId = recipientIdInput.value.trim().toUpperCase();
+    const amount = parseInt(transferAmountInput.value);
+    const currencyType = document.querySelector('input[name="currencyType"]:checked').value;
+
+    // --- 1. Проверки на корректность введенных данных ---
+    if (recipientId.length !== 9 || !/^[A-Z0-9]+$/.test(recipientId)) {
+        showToast("ID получателя должен состоять из 9 букв и цифр.", 'error');
+        return;
+    }
+    if (isNaN(amount) || amount <= 0) {
+        showToast("Введите корректное количество.", 'error');
+        return;
+    }
+
+    // --- 2. Проверка баланса, вычет валюты и сохранение ---
+    if (currencyType === 'COIN') {
+        if (coins < amount) {
+            showToast("Недостаточно монет.", 'error');
+            return;
+        }
+        // Мгновенно вычитаем монеты
+        coins -= amount;
+    } else if (currencyType === 'CRYS') {
+        if (crystals < amount) {
+            showToast("Недостаточно кристаллов.", 'error');
+            return;
+        }
+        // Мгновенно вычитаем кристаллы
+        crystals -= amount;
+    }
+
+    // Сразу сохраняем изменения и обновляем интерфейс
+    saveGameData();
+    updateUI();
+
+    // --- 3. Генерация шифр-кода ---
+    const nonce = Date.now() + Math.floor(Math.random() * 10000000);
+    const plaintext = `${nonce}x${amount}x${currencyType}x${recipientId}`;
+
+    generatedCodeArea.value = encrypt(plaintext);
+    showToast("Шифр-код успешно сгенерирован!", 'success');
+});
+
            claimCodeBtn.addEventListener('click', () => {
                const code = claimCodeInput.value.trim(); if (!code) { showToast("Введите шифр-код.", 'error'); return; }
                const plaintext = decrypt(code); if (!plaintext) { showToast("Неверный или поврежденный код.", 'error'); return; }
