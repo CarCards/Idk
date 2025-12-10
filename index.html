@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-   <title>Doolcoin</title>
+   <title>Doolcoin Online (Fixed)</title>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
    <style>
        * {
@@ -11,7 +11,7 @@
            -webkit-user-select: none;
            -moz-user-select: none;
            -ms-user-select: none;
-           -webkit-tap-highlight-color: transparent; /* Убираем выделение при нажатии */
+           -webkit-tap-highlight-color: transparent;
        }
 
        img {
@@ -32,8 +32,7 @@
            --danger-color-hover: #c53030;
            --success-color: #48bb78;
            --info-color: #4299e1;
-           --sakura-color: #ffb7c5;
-           --sakura-shadow-color: rgba(255, 183, 197, 0.8);
+           --gold-color: #ffd700;
        }
 
        body {
@@ -63,12 +62,7 @@
            --quest-progress-fill: #66bb6a;
        }
 
-       /* --- CUSTOM & EVENT BACKGROUNDS --- */
-       body.sakura-bg { background: linear-gradient(to bottom, #fde9e8, #f8c3d0); }
-       .petal { position: absolute; top: -20px; width: 15px; height: 15px; background-color: var(--sakura-color); border-radius: 1px 15px; pointer-events: none; animation: fall linear infinite; }
-       .petal::after { content: ''; position: absolute; width: 15px; height: 15px; background-color: var(--sakura-color); border-radius: 15px 1px; transform: rotate(30deg); }
-       @keyframes fall { 0% { transform: translateY(0) rotateZ(0deg); opacity: 1; } 100% { transform: translateY(105vh) rotateZ(var(--rotation)); opacity: 0; } }
-
+       /* --- BACKGROUNDS --- */
        body.space-nebula-bg, .preview-content.space-nebula-bg { background: linear-gradient(45deg, #0f0c29, #302b63, #24243e); }
        body.matrix-bg, .preview-content.matrix-bg {
            background-color: #000;
@@ -87,12 +81,12 @@
        }
        body.cyber-grid-bg::before, .preview-content.cyber-grid-bg::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at center, transparent 30%, #01041c 100%); pointer-events: none; }
        @keyframes scroll-grid { from { background-position: 0 0, 0 0, 0 0, 0 0; } to { background-position: 50px 50px, 50px 50px, -100px -100px, -100px -100px; } }
-       /* --- END BACKGROUNDS --- */
-
 
        .settings-button { position: fixed; top: 20px; background-color: var(--currency-bg); color: var(--text-color); border: 1px solid var(--currency-border); border-radius: 50%; width: 50px; height: 50px; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100; transition: transform 0.2s; left: 20px; }
        .settings-button:hover { transform: scale(1.1); }
 
+       .leaderboard-button { position: fixed; top: 80px; background-color: var(--currency-bg); color: var(--gold-color); border: 1px solid var(--currency-border); border-radius: 50%; width: 50px; height: 50px; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100; transition: transform 0.2s; left: 20px; }
+       .leaderboard-button:hover { transform: scale(1.1); }
 
        .theme-switcher { position: fixed; top: 20px; right: 20px; display: flex; align-items: center; gap: 10px; z-index: 100; transition: opacity 0.3s; }
        .theme-switcher.disabled { opacity: 0.5; pointer-events: none; cursor: not-allowed; }
@@ -110,21 +104,10 @@
        .top-content-wrapper { display: flex; flex-direction: column; align-items: center; gap: 10px; }
        .stats-container { display: flex; gap: 20px; z-index: 10; }
        .currency-box { font-size: 24px; background-color: var(--currency-bg); padding: 10px 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); display: flex; align-items: center; gap: 8px; color: var(--text-color); border: 1px solid var(--currency-border); backdrop-filter: blur(5px); }
-       .currency-box.sakura-box { border-color: var(--sakura-color); }
 
        .circle { width: 200px; height: 200px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: white; transition: transform 0.1s, box-shadow 0.3s, filter 0.3s; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); position: relative; overflow: hidden; z-index: 5; border: 2px solid var(--circle-border); touch-action: manipulation; }
 
-       /* --- EVENT --- */
-       #eventShopBtn { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 60px; height: 60px; border-radius: 50%; background-color: var(--sakura-color); border: 2px solid white; color: white; font-size: 30px; cursor: pointer; display: none; z-index: 10; animation: pulse-sakura 2s infinite, spawn-btn 0.5s ease-out; }
-       @keyframes pulse-sakura { 0% { box-shadow: 0 0 0 0 rgba(255, 183, 197, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(255, 183, 197, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 183, 197, 0); } }
-       @keyframes spawn-btn { from { transform: translateY(-50%) scale(0); opacity: 0; } to { transform: translateY(-50%) scale(1); opacity: 1; } }
-
-
        /* --- SKINS --- */
-       .circle.sakura-skin { background: radial-gradient(circle, #ffffff 0%, #ffc0cb 50%, #ffb7c5 100%); border-color: #ffb7c5; box-shadow: 0 0 20px #ffb7c5, inset 0 0 15px #ffb7c5, 0 0 50px rgba(255, 183, 197, 0.6); animation: sakura-pulse 3s infinite ease-in-out; }
-       .circle.sakura-skin::after { content: "💮"; font-size: 80px; color: rgba(255, 255, 255, 0.5); position: absolute; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; animation: rotate-vortex 30s linear infinite; text-shadow: 0 0 10px white; }
-       @keyframes sakura-pulse { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.04); filter: brightness(1.1); } }
-
        .circle.default-skin { background: linear-gradient( 45deg, rgba(255, 105, 180, 0.8), rgba(255, 165, 0, 0.8), rgba(148, 0, 211, 0.8), rgba(0, 0, 255, 0.8) ); background-size: 400% 400%; animation: gradient 8s ease infinite, pulse-subtle 3s infinite; }
        @keyframes pulse-subtle { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
        .circle.premium-skin { background: radial-gradient(circle, rgba(0, 200, 255, 0.9) 0%, rgba(0, 100, 200, 0.9) 100%); box-shadow: 0 0 20px #00c8ff, inset 0 0 15px rgba(0, 100, 200, 0.8); }
@@ -166,7 +149,6 @@
        /* --- END SKINS --- */
        
        @keyframes rotate-vortex { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-       @keyframes rotate-hue { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
        @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
        /* --- TAP EFFECTS --- */
@@ -196,15 +178,10 @@
 
        .crystal-effect { position: fixed; font-size: 36px; font-weight: bold; color: #00ffff; text-shadow: 0 0 15px rgba(0, 255, 255, 0.8), 0 0 30px rgba(0, 200, 255, 0.6); pointer-events: none; animation: crystal-animation 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards; z-index: 20; filter: drop-shadow(0 0 10px rgba(0, 200, 255, 0.8)); transform-origin: center; }
        @keyframes crystal-animation { 0% { transform: translate(0, 0) scale(0.5) rotate(0deg); opacity: 0; } 10% { opacity: 1; transform: translate(0, -10px) scale(0.7) rotate(10deg); } 30% { transform: translate(0, -30px) scale(1) rotate(-10deg); } 50% { transform: translate(0, -60px) scale(1.2) rotate(10deg); } 80% { transform: translate(0, -100px) scale(1.4) rotate(0deg); } 100% { transform: translate(0, -150px) scale(1.5) rotate(360deg); opacity: 0; } }
-       .sakura-effect { position: fixed; font-size: 36px; font-weight: bold; color: var(--sakura-color); text-shadow: 0 0 15px var(--sakura-shadow-color), 0 0 30px var(--sakura-shadow-color); pointer-events: none; animation: crystal-animation 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards; z-index: 21; filter: drop-shadow(0 0 10px var(--sakura-shadow-color)); transform-origin: center; }
-       .pulse { animation: pulse-effect 1s infinite; }
-       @keyframes pulse-effect { 0% { box-shadow: 0 0 10px 0 rgba(0, 200, 255, 0.5); } 50% { box-shadow: 0 0 30px 10px rgba(0, 200, 255, 0.8); } 100% { box-shadow: 0 0 10px 0 rgba(0, 200, 255, 0.5); } }
        .coin-effect { position: fixed; font-size: 24px; font-weight: bold; color: #ffffff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); pointer-events: none; animation: coin-animation 1s forwards; z-index: 15; transform: translateX(-50%); }
        @keyframes coin-animation { 0% { transform: translateY(0) scale(1) translateX(-50%); opacity: 1; } 100% { transform: translateY(-80px) scale(1.5) translateX(-50%); opacity: 0; } }
        .crystal-icon { font-size: 26px; color: #00ffff; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); animation: crystal-icon-pulse 2s infinite; }
        @keyframes crystal-icon-pulse { 0% { transform: scale(1); text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); } 50% { transform: scale(1.2); text-shadow: 0 0 20px rgba(0, 255, 255, 1); } 100% { transform: scale(1); text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); } }
-       .sakura-icon { font-size: 26px; color: var(--sakura-color); text-shadow: 0 0 10px var(--sakura-shadow-color); animation: sakura-icon-pulse 2.2s infinite; }
-       @keyframes sakura-icon-pulse { 0% { transform: scale(1) rotate(0deg); text-shadow: 0 0 10px var(--sakura-shadow-color); } 50% { transform: scale(1.2) rotate(15deg); text-shadow: 0 0 20px var(--sakura-shadow-color); } 100% { transform: scale(1) rotate(0deg); text-shadow: 0 0 10px var(--sakura-shadow-color); } }
 
        .ban-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: black; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; font-size: 24px; text-align: center; display: none; }
        .ban-timer { font-size: 48px; margin: 20px 0; color: red; }
@@ -277,42 +254,6 @@
        .buy-btn:hover { background-color: rgba(0, 200, 255, 0.5); }
        .buy-btn:disabled { background-color: rgba(100, 100, 100, 0.3); border-color: rgba(100, 100, 100, 0.5); cursor: not-allowed; }
        
-       /* Sakura Tree Styles */
-       #sakuraTreeImage {
-           width: 100px;
-           height: 100px;
-           margin: 10px auto;
-           display: block;
-       }
-       .sakura-tree-info {
-           font-size: 14px;
-           text-align: left;
-           margin: 10px 0;
-           padding: 0 10px;
-           display: grid;
-           grid-template-columns: 1fr 1fr;
-           gap: 5px;
-           opacity: 0.9;
-       }
-       .progress-bar-container {
-           display: flex;
-           gap: 5px;
-           height: 15px;
-           width: 80%;
-           margin: 10px auto;
-       }
-       .progress-bar-segment {
-           flex-grow: 1;
-           background-color: #333;
-           border-radius: 3px;
-           border: 1px solid var(--currency-border);
-       }
-       .progress-bar-segment.filled {
-           background-color: var(--sakura-color);
-           box-shadow: 0 0 5px var(--sakura-shadow-color);
-       }
-       /* End Sakura Tree Styles */
-       
        /* Case Specific Styles */
        .case-info { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
        .case-info img { width: 60px; height: 60px; border-radius: 8px; }
@@ -363,7 +304,6 @@
        .transfer-section { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--currency-border); display: flex; flex-direction: column; gap: 8px; }
        .transfer-section-title { font-size: 16px; margin-bottom: 5px; text-align: center; }
        #playerIDDisplay { font-weight: bold; color: #00ffff; user-select: text; -webkit-user-select: text; -moz-user-select: text; }
-       #generatedCodeArea { width: 100%; height: 60px; resize: none; background-color: rgba(0,0,0,0.2); color: var(--text-color); border-radius: 5px; padding: 5px; box-sizing: border-box; font-size: 12px; }
        .currency-selector { display: flex; justify-content: center; gap: 15px; }
 
        #rebirthModal .modal-content { text-align: center; }
@@ -418,10 +358,25 @@
        #previewModal .modal-content { padding: 0; }
        .preview-content { display: flex; align-items: center; justify-content: center; height: 300px; position: relative; overflow: hidden; border-radius: 10px; background-color: var(--bg-color); }
        .preview-circle { transform: scale(1.1); cursor: pointer; }
+
+       /* Leaderboard */
+       .leaderboard-list { max-height: 400px; overflow-y: auto; }
+       .leaderboard-item { display: flex; align-items: center; padding: 10px; background-color: rgba(255, 255, 255, 0.05); margin-bottom: 5px; border-radius: 8px; border: 1px solid var(--currency-border); }
+       .leaderboard-rank { font-size: 20px; font-weight: bold; width: 40px; text-align: center; color: var(--gold-color); }
+       .leaderboard-info { flex-grow: 1; margin-left: 10px; }
+       .leaderboard-name { font-size: 16px; font-weight: bold; }
+       .leaderboard-score { font-size: 14px; opacity: 0.8; }
+       .leaderboard-avatar { font-size: 24px; width: 40px; text-align: center; }
+       
+       /* Settings - Avatar Selector */
+       .avatar-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 10px; }
+       .avatar-option { font-size: 24px; cursor: pointer; padding: 5px; border: 1px solid var(--currency-border); border-radius: 5px; text-align: center; background: rgba(0,0,0,0.3); }
+       .avatar-option.selected { border-color: #00ffff; background: rgba(0,255,255,0.1); }
    </style>
 </head>
 <body>
    <button class="settings-button" id="settingsBtn">⚙️</button>
+   <button class="leaderboard-button" id="leaderboardBtn">🏆</button>
 
    <div class="theme-switcher" id="themeSwitcher">
        <div class="theme-label">🌙</div>
@@ -441,10 +396,6 @@
    </div>
 
     <div class="top-content-wrapper">
-        <div class="currency-box sakura-box">
-           <span id="sakuraPoints">0</span>
-           <span class="sakura-icon">🌸</span>
-        </div>
         <div class="stats-container">
            <div class="currency-box">
                <span id="crystals">0</span>
@@ -461,7 +412,6 @@
 
     <div style="position: relative; display: flex; align-items: center;">
         <div class="circle default-skin" id="circle"></div>
-        <button id="eventShopBtn">💮</button>
     </div>
 
    <div id="retractablePanel">
@@ -498,32 +448,17 @@
        </div>
    </div>
 
-    <div class="modal-overlay" id="eventShopModal">
+   <div class="modal-overlay" id="leaderboardModal">
        <div class="modal">
            <div class="modal-header">
-               <div class="modal-title">Магазин Сакуры 🌸</div>
+               <div class="modal-title">Топ Игроков 🏆</div>
                <div class="close-modal">✕</div>
            </div>
-           <div class="modal-content shop-content" id="eventShopContent" style="display: flex; flex-direction: column; gap: 15px;">
-                <!-- Event items will be generated here -->
-           </div>
-       </div>
-   </div>
-
-   <div class="modal-overlay" id="sakuraExchangeModal">
-       <div class="modal">
-           <div class="modal-header">
-               <div class="modal-title">Обмен на Очки Сакуры</div>
-               <div class="close-modal">✕</div>
-           </div>
-            <div class="modal-content">
-               <div class="exchange-rate" id="sakuraExchangeRate">1,000 Đ = 1 🌸</div>
-               <input type="number" class="modal-input" id="sakuraExchangeInput" placeholder="Количество монет" min="1000">
-               <div class="exchange-output" id="sakuraExchangeOutput">Вы получите: 0 🌸</div>
-               <div class="modal-action">
-                   <button class="modal-submit-btn" id="sakuraExchangeSubmit">Обменять</button>
-                   <button class="exchange-cancel" id="sakuraExchangeCancel">Отмена</button>
+           <div class="modal-content">
+               <div id="leaderboardList" class="leaderboard-list">
+                   <div style="text-align:center; padding: 20px;">Загрузка...</div>
                </div>
+               <button id="refreshLeaderboardBtn" class="settings-btn">Обновить</button>
            </div>
        </div>
    </div>
@@ -544,34 +479,23 @@
    <div class="modal-overlay" id="transferModal">
        <div class="modal">
            <div class="modal-header">
-               <div class="modal-title">Отправка валют</div>
+               <div class="modal-title">Переводы (Online)</div>
                <div class="close-modal">✕</div>
            </div>
-           <div class="shop-tabs" id="transferTabs">
-                <div class="shop-tab active" data-tab="activate">Активация</div>
-                <div class="shop-tab" data-tab="create">Создание</div>
-           </div>
            <div class="modal-content">
-                <div class="transfer-tab-content" id="activateTab">
-                    <div class="transfer-section" style="border-top: none; padding-top: 0;">
-                        <div class="transfer-section-title">Активировать шифр-код</div>
-                        <input type="text" id="claimCodeInput" class="modal-input" placeholder="Введите шифр-код">
-                        <button id="claimCodeBtn" class="modal-submit-btn">Получить</button>
+                <div style="text-align: center; margin-bottom: 10px;">Ваш ID: <span id="playerIDDisplay"></span></div>
+                <div class="transfer-section" style="border-top: none; padding-top: 0;">
+                    <div class="transfer-section-title">Отправить средства</div>
+                    <input type="text" id="recipientIdInput" class="modal-input" placeholder="ID получателя (9 символов)">
+                    <input type="number" id="transferAmountInput" class="modal-input" placeholder="Количество">
+                    <div class="currency-selector">
+                        <label><input type="radio" name="currencyType" value="COIN" checked> Đ</label>
+                        <label><input type="radio" name="currencyType" value="CRYS"> ✦</label>
                     </div>
+                    <button id="sendTransferBtn" class="modal-submit-btn">Отправить</button>
                 </div>
-                <div class="transfer-tab-content" id="createTab" style="display: none;">
-                    <div style="text-align: center; margin-bottom: 10px;">Ваш ID: <span id="playerIDDisplay"></span></div>
-                    <div class="transfer-section" style="border-top: none; padding-top: 0;">
-                        <div class="transfer-section-title">Создать шифр-код</div>
-                        <input type="text" id="recipientIdInput" class="modal-input" placeholder="ID получателя">
-                        <input type="number" id="transferAmountInput" class="modal-input" placeholder="Количество">
-                        <div class="currency-selector">
-                            <label><input type="radio" name="currencyType" value="COIN" checked> Đ</label>
-                            <label><input type="radio" name="currencyType" value="CRYS"> ✦</label>
-                        </div>
-                        <button id="generateCodeBtn" class="modal-submit-btn">Сгенерировать</button>
-                        <textarea id="generatedCodeArea" readonly placeholder="Здесь появится шифр-код..."></textarea>
-                    </div>
+                <div style="text-align: center; font-size: 12px; margin-top: 10px; opacity: 0.7;">
+                    Переводы осуществляются мгновенно через облако Firebase.
                 </div>
            </div>
        </div>
@@ -632,41 +556,6 @@
             </div>
         </div>
     </div>
-
-   <div class="modal-overlay" id="adminPanel">
-        <div class="modal admin-panel-draggable">
-           <div class="modal-header" id="adminPanelHeader">
-               <div class="modal-title">Админ-панель</div>
-               <div class="close-modal">✕</div>
-           </div>
-           <div class="modal-content">
-               <label for="adminCoinsInput">Монеты:</label>
-               <input type="number" id="adminCoinsInput" class="modal-input" placeholder="Введите количество монет">
-               <div class="modal-action">
-                   <button id="setCoinsBtn" class="admin-submit-btn">Установить</button>
-                   <button id="addCoinsBtn" class="admin-submit-btn">Добавить</button>
-               </div>
-               <label for="adminCrystalsInput">Кристаллы:</label>
-               <input type="number" id="adminCrystalsInput" class="modal-input" placeholder="Введите количество кристаллов">
-               <div class="modal-action">
-                   <button id="setCrystalsBtn" class="admin-submit-btn">Установить</button>
-                   <button id="addCrystalsBtn" class="admin-submit-btn">Добавить</button>
-               </div>
-                <label for="adminSakuraInput">Очки Сакуры:</label>
-                <input type="number" id="adminSakuraInput" class="modal-input" placeholder="Введите количество">
-                <div class="modal-action">
-                   <button id="setSakuraBtn" class="admin-submit-btn">Установить</button>
-                   <button id="addSakuraBtn" class="admin-submit-btn">Добавить</button>
-                </div>
-               <label for="adminRebirthsInput">Перерождения:</label>
-               <input type="number" id="adminRebirthsInput" class="modal-input" placeholder="Введите количество">
-               <div class="modal-action">
-                   <button id="setRebirthsBtn" class="admin-submit-btn">Установить</button>
-                   <button id="addRebirthsBtn" class="admin-submit-btn">Добавить</button>
-               </div>
-           </div>
-       </div>
-   </div>
    
    <div class="modal-overlay" id="settingsModal">
        <div class="modal">
@@ -676,20 +565,22 @@
            </div>
            <div class="modal-content">
                <div class="settings-info-row">
-                   <span class="settings-info-label">Версия:</span>
-                   <span class="settings-info-value" id="gameVersion">v_3.9</span>
-               </div>
-               <div class="settings-info-row">
-                   <span class="settings-info-label">Время в игре:</span>
-                   <span class="settings-info-value" id="playTime">0 мин</span>
-               </div>
-               <div class="settings-info-row">
                    <span class="settings-info-label">Ваш ID:</span>
                    <span class="settings-info-value" id="settingsPlayerId"></span>
                </div>
+               
+               <div style="border-bottom: 1px solid var(--currency-border); padding-bottom: 10px;">
+                    <label style="font-size: 14px; opacity: 0.8;">Никнейм:</label>
+                    <input type="text" id="nicknameInput" class="modal-input" placeholder="Игрок" maxlength="15">
+                    <label style="font-size: 14px; opacity: 0.8;">Аватар:</label>
+                    <div class="avatar-grid" id="avatarGrid">
+                        <!-- Generated via JS -->
+                    </div>
+                    <button class="settings-btn" id="saveProfileBtn" style="margin-top: 10px;">Сохранить Профиль</button>
+               </div>
+
                <div class="settings-actions">
                    <button class="settings-btn" id="copyIdBtn">Копировать ID</button>
-                   <button class="settings-btn" id="changeIdBtn">Сменить ID <br> (1 ♻️)</button>
                    <button class="settings-toggle-btn" id="autoThemeToggleBtn">Auto-тема</button>
                    <button class="settings-toggle-btn" id="quickOpeningToggleBtn">Быстрое открытие</button>
                    <button class="settings-toggle-btn" id="antiLagToggleBtn">Анти-лаг</button>
@@ -704,16 +595,17 @@
     <div class="modal-overlay" id="changelogModal">
        <div class="modal">
            <div class="modal-header">
-               <div class="modal-title">Список изменений (v3.9)</div>
+               <div class="modal-title">Список изменений (v4.0 Cloud)</div>
                <div class="close-modal">✕</div>
            </div>
            <div class="modal-content">
                 <ul>
-                    <li>🌸 Переработка ивента "Цветение Сакуры"! 🌸</li>
-                    <li>Добавлено Дерево Сакуры, которое можно улучшать за очки сакуры для получения бонусов и уровней перерождения!</li>
-                    <li>Незначительно изменён интерфейс</li>
-                    <li>Кейс Сакуры теперь с другой текстурой </li>
-                    <li>скоро будет голосование менять ивент или нет</li>
+                    <li>🔥 ГЛОБАЛЬНОЕ ОБНОВЛЕНИЕ: FIREBASE!</li>
+                    <li>💾 Теперь данные хранятся в облаке. Играйте с любого устройства!</li>
+                    <li>🏆 Добавлена Таблица Лидеров. Соревнуйтесь с другими!</li>
+                    <li>✉️ Новая система переводов по ID (без шифров).</li>
+                    <li>👤 Настройка профиля: смените никнейм и иконку.</li>
+                    <li>🗑️ Удален ивент Сакуры (закончился).</li>
                 </ul>
            </div>
        </div>
@@ -790,14 +682,74 @@
         </div>
     </div>
 
+   <script type="module">
+       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+       import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+       import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, collection, onSnapshot, getDocs, deleteDoc, addDoc, query, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-   <script>
+       // Fallback for local testing if __firebase_config is missing
+       let firebaseConfig;
+       let appId;
+       
+       try {
+           firebaseConfig = JSON.parse(__firebase_config);
+           appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+       } catch (e) {
+           console.error("Firebase config missing. This app must be run in the correct environment.");
+           firebaseConfig = {}; // Prevent immediate crash, but auth will fail
+           appId = 'default';
+       }
+
+       const app = initializeApp(firebaseConfig);
+       const auth = getAuth(app);
+       const db = getFirestore(app);
+
+       let currentUser = null;
+       let userDataDocRef = null;
+       let userPublicDocRef = null;
+
        document.addEventListener('DOMContentLoaded', function() {
+           
+           // --- Firebase Auth & Init ---
+           const initAuth = async () => {
+             try {
+                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                   await signInWithCustomToken(auth, __initial_auth_token);
+                 } else {
+                   await signInAnonymously(auth);
+                 }
+             } catch (error) {
+                 console.error("Auth Error:", error);
+                 showToast("Ошибка авторизации: " + error.message, "error");
+             }
+           };
+
+           onAuthStateChanged(auth, async (user) => {
+               if (user) {
+                   currentUser = user;
+                   showToast('Подключено к облаку!', 'success');
+                   playerId = user.uid.substring(0, 9).toUpperCase(); // Short ID for UI
+                   
+                   // Setup Doc Refs
+                   // Private Data (Save File)
+                   userDataDocRef = doc(db, 'artifacts', appId, 'users', user.uid, 'gameData', 'save');
+                   // Public Data (Leaderboard Profile)
+                   userPublicDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'profiles', user.uid);
+
+                   // Start Listeners
+                   loadGameData();
+                   setupTransferListener();
+               } else {
+                   // showToast('Ошибка подключения к облаку.', 'error');
+               }
+           });
+
+           initAuth();
+
            // --- Element Selectors ---
            const circle = document.getElementById('circle');
            const coinsElement = document.getElementById('coins');
            const crystalsElement = document.getElementById('crystals');
-           const sakuraPointsElement = document.getElementById('sakuraPoints');
            const banScreen = document.getElementById('banScreen');
            const banTimer = document.getElementById('banTimer');
            const warning = document.getElementById('warning');
@@ -807,20 +759,6 @@
            const backgroundContainer = document.getElementById('backgroundContainer');
            const settingsBtn = document.getElementById('settingsBtn');
            const toastContainer = document.getElementById('toastContainer');
-           const adminPanel = document.getElementById('adminPanel');
-           const adminPanelHeader = document.getElementById('adminPanelHeader');
-           const adminCoinsInput = document.getElementById('adminCoinsInput');
-           const setCoinsBtn = document.getElementById('setCoinsBtn');
-           const addCoinsBtn = document.getElementById('addCoinsBtn');
-           const adminCrystalsInput = document.getElementById('adminCrystalsInput');
-           const setCrystalsBtn = document.getElementById('setCrystalsBtn');
-           const addCrystalsBtn = document.getElementById('addCrystalsBtn');
-           const adminSakuraInput = document.getElementById('adminSakuraInput');
-           const setSakuraBtn = document.getElementById('setSakuraBtn');
-           const addSakuraBtn = document.getElementById('addSakuraBtn');
-           const adminRebirthsInput = document.getElementById('adminRebirthsInput');
-           const setRebirthsBtn = document.getElementById('setRebirthsBtn');
-           const addRebirthsBtn = document.getElementById('addRebirthsBtn');
            const retractablePanel = document.getElementById('retractablePanel');
            const panelToggle = document.getElementById('panelToggle');
            const shopBtn = document.getElementById('shopBtn');
@@ -829,9 +767,9 @@
            const exchangeBtn = document.getElementById('exchangeBtn');
            const promocodeBtn = document.getElementById('promocodeBtn');
            const rebirthBtn = document.getElementById('rebirthBtn');
+           const leaderboardBtn = document.getElementById('leaderboardBtn');
            const allModals = document.querySelectorAll('.modal-overlay');
            const shop = document.getElementById('shop');
-           const shopTitle = document.getElementById('shopTitle');
            const shopTabs = document.querySelectorAll('#shop .shop-tab');
            const skinsTab = document.getElementById('skinsTab');
            const boostsTab = document.getElementById('boostsTab');
@@ -841,16 +779,10 @@
            const questsList = document.getElementById('questsList');
            const refreshQuestsBtn = document.getElementById('refreshQuestsBtn');
            const transferModal = document.getElementById('transferModal');
-           const transferTabs = document.querySelectorAll('#transferTabs .shop-tab');
-           const activateTab = document.getElementById('activateTab');
-           const createTab = document.getElementById('createTab');
            const playerIDDisplay = document.getElementById('playerIDDisplay');
            const recipientIdInput = document.getElementById('recipientIdInput');
            const transferAmountInput = document.getElementById('transferAmountInput');
-           const generateCodeBtn = document.getElementById('generateCodeBtn');
-           const generatedCodeArea = document.getElementById('generatedCodeArea');
-           const claimCodeInput = document.getElementById('claimCodeInput');
-           const claimCodeBtn = document.getElementById('claimCodeBtn');
+           const sendTransferBtn = document.getElementById('sendTransferBtn');
            const exchangeModal = document.getElementById('exchangeModal');
            const exchangeInput = document.getElementById('exchangeInput');
            const exchangeSubmit = document.getElementById('exchangeSubmit');
@@ -863,11 +795,8 @@
            const rebirthCostDisplay = document.getElementById('rebirthCostDisplay');
            const rebirthBtnConfirm = document.getElementById('rebirthBtnConfirm');
            const settingsModal = document.getElementById('settingsModal');
-           const gameVersionElement = document.getElementById('gameVersion');
-           const playTimeElement = document.getElementById('playTime');
            const settingsPlayerId = document.getElementById('settingsPlayerId');
            const copyIdBtn = document.getElementById('copyIdBtn');
-           const changeIdBtn = document.getElementById('changeIdBtn');
            const fullResetBtn = document.getElementById('fullResetBtn');
            const telegramBtn = document.getElementById('telegramBtn');
            const autoThemeToggleBtn = document.getElementById('autoThemeToggleBtn');
@@ -903,48 +832,38 @@
            const previewModal = document.getElementById('previewModal');
            const previewTitle = document.getElementById('previewTitle');
            const previewContent = document.getElementById('previewContent');
+           const leaderboardModal = document.getElementById('leaderboardModal');
+           const leaderboardList = document.getElementById('leaderboardList');
+           const refreshLeaderboardBtn = document.getElementById('refreshLeaderboardBtn');
+           const nicknameInput = document.getElementById('nicknameInput');
+           const avatarGrid = document.getElementById('avatarGrid');
+           const saveProfileBtn = document.getElementById('saveProfileBtn');
            
-           // Event Elements
-           const eventShopBtn = document.getElementById('eventShopBtn');
-           const eventShopModal = document.getElementById('eventShopModal');
-           const eventShopContent = document.getElementById('eventShopContent');
-           const sakuraExchangeModal = document.getElementById('sakuraExchangeModal');
-           const sakuraExchangeInput = document.getElementById('sakuraExchangeInput');
-           const sakuraExchangeOutput = document.getElementById('sakuraExchangeOutput');
-           const sakuraExchangeSubmit = document.getElementById('sakuraExchangeSubmit');
-           const sakuraExchangeCancel = document.getElementById('sakuraExchangeCancel');
-
            // --- Game State ---
-           let coins, crystals, sakuraPoints, currentTheme, autoThemeEnabled, currentSkin, ownedSkins, currentBackground, ownedBackgrounds, usedPromoCodes, activeQuests, playerId, usedCipherCodes, totalPlayTime, rebirthLevel, antiLagEnabled, idChanged, quickOpeningEnabled, sakuraTreeLevel, sakuraTreeRebirths;
-           let sessionStartTime = Date.now();
+           let coins = 0, crystals = 0, currentTheme = 'dark', autoThemeEnabled = false, currentSkin = 'default-skin', ownedSkins = ['default-skin'], currentBackground = 'default-bg', ownedBackgrounds = ['default-bg'], usedPromoCodes = [], activeQuests = [], playerId = 'LOADING...', totalPlayTime = 0, rebirthLevel = 0, antiLagEnabled = false, quickOpeningEnabled = false;
+           // Profile Data
+           let playerNickname = "Игрок";
+           let playerIcon = "👤";
+
            let activeBoosts = [];
            let coinMultiplier = 1;
            let crystalChance = 0.05;
-           let sakuraCrystalChance = 0.025;
            let autoclickerInterval = null;
            let clickCount = 0;
            let lastClickTime = 0;
            let banInterval = null;
-           let petalInterval = null;
            let fireflyInterval = null;
            let mainBoostInterval = null;
-           let playTimeInterval = null;
            let glitchToastTimer = null; 
            let glitchRedirectTimer = null;
-           let versionHoldTimer = null;
            let caseBoxPrice = 0;
            let currentAnimationReward = null;
            let isAnimationRunning = false;
-           
-           let eventShopInterval = null;
-           let eventShopTimeout = null;
-
+           let saveTimeout = null;
            let caseTransitionEndHandler = null;
            let boxTimeoutId = null;
 
-           const SAKURA_EXCHANGE_RATE = 1000; // 1000 coins for 1 sakura point
-           const SAKURA_TREE_COSTS = [100, 500, 1000, 2500, 5000];
-           const SAKURA_BONUS_INCREMENT = 0.005; // 0.5% per level
+           const AVATARS = ["👤", "😎", "🐱", "🐶", "🦊", "🤖", "👻", "💀", "👾", "👽", "💩", "🤡", "👹", "🤠", "🌸"];
 
            const cases = [
                 { id: 'nature', name: 'Nature', price: 500, rewards: [
@@ -996,17 +915,6 @@
                     { type: 'coins', value: 2500000, chance: 0.46, rarity: 'rare' },
                 ]}
             ];
-
-            const sakuraCase = {
-                id: 'sakura_case', name: 'Кейс Сакуры', price: 1000, currency: 'sakura_points', rewards: [
-                    { type: 'rebirth', value: 5, chance: 0.01, rarity: 'mythic' },
-                    { type: 'rebirth', value: 1, chance: 0.09, rarity: 'legendary' },
-                    { type: 'skin', value: 'sakura-skin', chance: 0.15, rarity: 'epic' },
-                    { type: 'background', value: 'sakura-bg', chance: 0.15, rarity: 'epic' },
-                    { type: 'box', value: 1, chance: 0.30, rarity: 'rare' },
-                    { type: 'sakura_points', value: 1000, chance: 0.30, rarity: 'uncommon' }
-                ]
-            };
             
             const caseImages = {
                 'nature': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/nature2.png',
@@ -1015,8 +923,7 @@
                 'molten': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/molten2.png',
                 'crazy': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/Crazy%20chest.png',
                 'ghost': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/ghost2.png',
-                'omega_star': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/%C3%98M%C4%92%C4%9C%C3%83%20star%20chest.png',
-                'sakura_case': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/sakura.png'
+                'omega_star': 'https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/%C3%98M%C4%92%C4%9C%C3%83%20star%20chest.png'
             };
 
            const allQuests = [
@@ -1040,30 +947,97 @@
                { id: 18, type: 'clicks', target: 100000, description: "Нажать 100.000 раз", rewardType: 'crystals', rewardAmount: 10000 },
            ];
 
-           const promoCodes = { "FRESHSTART": { type: "coins", value: 1000, message: "Получено 1000 монет! Добро пожаловать!" }, "INEEDMONEY": { type: "coins", value: 50000, message: "Получено 50.000 монет! Удачи!" }, "CRYSTALINFECTION": { type: "crystals", value: 25, message: "Получено 25 кристаллов!" }, "IAMSUB": { type: "coins", value: 2500, message: "Спасибо за подписку! Получено 2.500 монет!" }, "500CRYSTALSECRETCODE": { type: "crystals", value: 500, message: "Найдено! Получено 500 кристаллов!" }, "ACTIVATEADMINPANNELCODETRUE": { type: "admin", message: "Админ-панель активирована!" }, "LUCKYDAY": { type: "crystals", value: 10, message: "Удачный день! +10 кристаллов." }, "BIGMONEY": { type: "coins", value: 100000, message: "Большой куш! +100,000 монет." }, "CRYSTALRUSH": { type: "crystals", value: 75, message: "Кристальная лихорадка! +75 кристаллов." }, "SECRETCODE2025": { type: "coins", value: 20250, message: "Секретный код найден! +20,250 монет." }, "HACKERMAN": { type: "coins", value: 77777, message: "Система взломана! +77,777 монет." }, "50KSECRETCRYSTALS": { type: 'crystals', value: 50000, message: 'Секрет найден! +50,000 кристаллов!' }, "OMEGASTARCASE": { type: 'case', value: 'omega_star', message: 'Секрет найден! Вы получили кейс ØMĒĜÃ star!' }, "BOXSECRET": { type: 'box', value: 1, message: 'Секрет найден! Вы получили Коробку с кейсами!' } };
+           const promoCodes = { "FRESHSTART": { type: "coins", value: 1000, message: "Получено 1000 монет! Добро пожаловать!" }, "INEEDMONEY": { type: "coins", value: 50000, message: "Получено 50.000 монет! Удачи!" }, "CRYSTALINFECTION": { type: "crystals", value: 25, message: "Получено 25 кристаллов!" }, "IAMSUB": { type: "coins", value: 2500, message: "Спасибо за подписку! Получено 2.500 монет!" }, "500CRYSTALSECRETCODE": { type: "crystals", value: 500, message: "Найдено! Получено 500 кристаллов!" }, "LUCKYDAY": { type: "crystals", value: 10, message: "Удачный день! +10 кристаллов." }, "BIGMONEY": { type: "coins", value: 100000, message: "Большой куш! +100,000 монет." }, "CRYSTALRUSH": { type: "crystals", value: 75, message: "Кристальная лихорадка! +75 кристаллов." }, "SECRETCODE2025": { type: "coins", value: 20250, message: "Секретный код найден! +20,250 монет." }, "HACKERMAN": { type: "coins", value: 77777, message: "Система взломана! +77,777 монет." }, "50KSECRETCRYSTALS": { type: 'crystals', value: 50000, message: 'Секрет найден! +50,000 кристаллов!' }, "OMEGASTARCASE": { type: 'case', value: 'omega_star', message: 'Секрет найден! Вы получили кейс ØMĒĜÃ star!' }, "BOXSECRET": { type: 'box', value: 1, message: 'Секрет найден! Вы получили Коробку с кейсами!' } };
            
            function loadGameData() {
-               coins = parseFloat(localStorage.getItem('doolcoins')) || 0;
-               crystals = parseFloat(localStorage.getItem('crystals')) || 0;
-               sakuraPoints = parseFloat(localStorage.getItem('sakuraPoints')) || 0;
-               currentTheme = localStorage.getItem('theme') || 'dark';
-               autoThemeEnabled = localStorage.getItem('autoThemeEnabled') === 'true';
-               antiLagEnabled = localStorage.getItem('antiLagEnabled') === 'true';
-               quickOpeningEnabled = localStorage.getItem('quickOpeningEnabled') === 'true';
-               idChanged = localStorage.getItem('idChanged') === 'true';
-               currentSkin = localStorage.getItem('skin') || 'default-skin';
-               ownedSkins = JSON.parse(localStorage.getItem('ownedSkins')) || ['default-skin'];
-               currentBackground = localStorage.getItem('background') || 'default-bg';
-               ownedBackgrounds = JSON.parse(localStorage.getItem('ownedBackgrounds')) || ['default-bg'];
-               usedPromoCodes = JSON.parse(localStorage.getItem('usedPromoCodes')) || [];
-               let loadedQuests = JSON.parse(localStorage.getItem('activeQuests')) || [];
-               activeQuests = validateAndCleanQuests(loadedQuests);
-               playerId = localStorage.getItem('doolcoin_player_id') || null;
-               usedCipherCodes = JSON.parse(localStorage.getItem('usedCipherCodes')) || [];
-               totalPlayTime = parseInt(localStorage.getItem('totalPlayTime')) || 0;
-               rebirthLevel = parseInt(localStorage.getItem('rebirthLevel')) || 0;
-               sakuraTreeLevel = parseInt(localStorage.getItem('sakuraTreeLevel')) || 0;
-               sakuraTreeRebirths = parseInt(localStorage.getItem('sakuraTreeRebirths')) || 0;
+               if (!userDataDocRef) return;
+               
+               onSnapshot(userDataDocRef, (docSnap) => {
+                   if (docSnap.exists()) {
+                       const data = docSnap.data();
+                       coins = data.coins || 0;
+                       crystals = data.crystals || 0;
+                       currentTheme = data.theme || 'dark';
+                       autoThemeEnabled = data.autoThemeEnabled || false;
+                       antiLagEnabled = data.antiLagEnabled || false;
+                       quickOpeningEnabled = data.quickOpeningEnabled || false;
+                       currentSkin = data.skin || 'default-skin';
+                       ownedSkins = data.ownedSkins || ['default-skin'];
+                       currentBackground = data.background || 'default-bg';
+                       ownedBackgrounds = data.ownedBackgrounds || ['default-bg'];
+                       usedPromoCodes = data.usedPromoCodes || [];
+                       activeQuests = validateAndCleanQuests(data.activeQuests || []);
+                       rebirthLevel = data.rebirthLevel || 0;
+                       playerNickname = data.playerNickname || "Игрок";
+                       playerIcon = data.playerIcon || "👤";
+                       
+                       // Initialize UI with loaded data
+                       updateUI();
+                       applyTheme(currentTheme);
+                       applyBackground(currentBackground);
+                       applySkin(currentSkin);
+                       if (activeQuests.length < 3) fillMissingQuests(true);
+                       renderQuests();
+                       renderAvatarGrid();
+                       updateSettingsButtons();
+                   } else {
+                       // New user setup
+                       console.log("No existing data, creating new user...");
+                       saveGameData(); // Initial save
+                       fillMissingQuests(true);
+                       renderQuests();
+                       renderAvatarGrid();
+                   }
+                   
+                   // UI display update
+                   playerIDDisplay.textContent = playerId;
+                   settingsPlayerId.textContent = playerId;
+                   nicknameInput.value = playerNickname;
+               }, (error) => {
+                   console.error("Error loading data:", error);
+                   // Check for permission denied specifically
+                   if (error.code === 'permission-denied') {
+                       showToast("Ошибка доступа к данным (Permission Denied).", "error");
+                   } else {
+                       showToast("Ошибка синхронизации: " + error.message, "error");
+                   }
+               });
+               
+               fillShopTabs();
+               startBoostManager();
+               protectImages();
+           }
+
+           function setupTransferListener() {
+               // FIXED: Use a simple collection query without complex filters to avoid index requirements
+               const q = collection(db, 'artifacts', appId, 'public', 'data', 'transfers');
+               
+               onSnapshot(q, (snapshot) => {
+                   snapshot.docChanges().forEach(async (change) => {
+                       if (change.type === "added") {
+                           const data = change.doc.data();
+                           
+                           // Filter in Memory (Safe & Robust)
+                           if (data.to === playerId && data.amount > 0) {
+                               console.log("Processing transfer:", data);
+                               if (data.currency === 'COIN') {
+                                   coins += data.amount;
+                                   showToast(`💰 Поступил перевод: ${formatNumber(data.amount)} Đ`, 'success');
+                               } else if (data.currency === 'CRYS') {
+                                   crystals += data.amount;
+                                   showToast(`💎 Поступил перевод: ${formatNumber(data.amount)} ✦`, 'success');
+                               }
+                               saveGameData();
+                               // Delete the transfer msg to prevent double claiming
+                               try {
+                                    await deleteDoc(change.doc.ref);
+                               } catch (err) {
+                                   console.warn("Could not delete transfer doc (might already be deleted)", err);
+                               }
+                           }
+                       }
+                   });
+               }, (error) => console.log("Transfer listener error", error));
            }
 
            function validateAndCleanQuests(loadedQuests) {
@@ -1089,25 +1063,6 @@
                if (!isInitial) { saveGameData(); renderQuests(); }
            }
            
-           function initializeGame() {
-               loadGameData();
-               generatePlayerId();
-               fillShopTabs(); 
-               fillEventShop();
-               if (autoThemeEnabled) { applyAutoTheme(); themeSwitcher.classList.add('disabled'); } 
-               else { applyTheme(currentTheme); themeSwitcher.classList.remove('disabled'); }
-               applyBackground(currentBackground);
-               applySkin(currentSkin);
-               if (activeQuests.length < 3) fillMissingQuests(true);
-               renderQuests();
-               updateSettingsButtons();
-               updateUI();
-               startBoostManager();
-               startPlayTimeTracker();
-               startEventShopSpawner();
-               protectImages();
-           }
-           
            function protectImages() {
                 document.querySelectorAll('img').forEach(img => {
                     img.setAttribute('oncontextmenu', 'return false;');
@@ -1119,14 +1074,12 @@
                 antiLagToggleBtn.classList.toggle('active', antiLagEnabled);
                 autoThemeToggleBtn.classList.toggle('active', autoThemeEnabled);
                 quickOpeningToggleBtn.classList.toggle('active', quickOpeningEnabled);
-                if (idChanged) { changeIdBtn.disabled = true; changeIdBtn.textContent = 'ID изменен'; }
            }
 
            function applyTheme(theme) {
                document.body.classList.remove('light-theme', 'dark-theme');
                document.body.classList.add(theme + '-theme');
                currentTheme = theme;
-               localStorage.setItem('theme', currentTheme);
                themeToggle.classList.toggle('active', currentTheme === 'light');
            }
 
@@ -1138,62 +1091,24 @@
 
            function toggleAutoTheme() {
                autoThemeEnabled = !autoThemeEnabled;
-               localStorage.setItem('autoThemeEnabled', autoThemeEnabled);
                autoThemeToggleBtn.classList.toggle('active', autoThemeEnabled);
                if (autoThemeEnabled) { applyAutoTheme(); themeSwitcher.classList.add('disabled'); } 
                else { applyTheme(currentTheme); themeSwitcher.classList.remove('disabled'); }
-               updateAutoThemeButtonState();
+               saveGameData();
            }
            
            function toggleAntiLag() {
                antiLagEnabled = !antiLagEnabled;
-               localStorage.setItem('antiLagEnabled', antiLagEnabled);
                antiLagToggleBtn.classList.toggle('active', antiLagEnabled);
                showToast(`Анти-лаг режим ${antiLagEnabled ? 'включен' : 'отключен'}`, 'info');
+               saveGameData();
            }
 
            function toggleQuickOpening() {
                quickOpeningEnabled = !quickOpeningEnabled;
-               localStorage.setItem('quickOpeningEnabled', quickOpeningEnabled);
                quickOpeningToggleBtn.classList.toggle('active', quickOpeningEnabled);
                showToast(`Быстрое открытие ${quickOpeningEnabled ? 'включено' : 'отключено'}`, 'info');
-           }
-
-           function updateAutoThemeButtonState() {
-               if (currentBackground === 'default-bg') {
-                   autoThemeToggleBtn.disabled = false;
-                   if (autoThemeEnabled) { themeSwitcher.classList.add('disabled'); } 
-                   else { themeSwitcher.classList.remove('disabled'); }
-               } else { autoThemeToggleBtn.disabled = true; }
-           }
-
-           function generatePlayerId(forceNew = false) {
-               if (!playerId || forceNew) {
-                   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-                   let newId = '';
-                   for (let i = 0; i < 9; i++) { newId += chars.charAt(Math.floor(Math.random() * chars.length)); }
-                   playerId = newId;
-                   localStorage.setItem('doolcoin_player_id', playerId);
-               }
-               playerIDDisplay.textContent = playerId;
-               settingsPlayerId.textContent = playerId;
-           }
-           
-           function startPlayTimeTracker() {
-               if (playTimeInterval) clearInterval(playTimeInterval);
-               updatePlayTimeDisplay();
-               playTimeInterval = setInterval(() => {
-                   const sessionDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
-                   localStorage.setItem('totalPlayTime', totalPlayTime + sessionDuration);
-                   updatePlayTimeDisplay();
-               }, 60000);
-           }
-           
-           function updatePlayTimeDisplay() {
-                const currentTotalSeconds = totalPlayTime + Math.floor((Date.now() - sessionStartTime) / 1000);
-                const totalMinutes = Math.floor(currentTotalSeconds / 60);
-                if (totalMinutes < 60) { playTimeElement.textContent = `${totalMinutes} мин`; } 
-                else { const hours = Math.floor(totalMinutes / 60); const minutes = totalMinutes % 60; playTimeElement.textContent = `${hours} ч ${minutes} мин`; }
+               saveGameData();
            }
 
            function formatNumber(num) {
@@ -1206,34 +1121,56 @@
            }
 
            function saveGameData() {
-               localStorage.setItem('doolcoins', coins);
-               localStorage.setItem('crystals', crystals);
-               localStorage.setItem('sakuraPoints', sakuraPoints);
-               localStorage.setItem('skin', currentSkin);
-               localStorage.setItem('ownedSkins', JSON.stringify(ownedSkins));
-               localStorage.setItem('background', currentBackground);
-               localStorage.setItem('ownedBackgrounds', JSON.stringify(ownedBackgrounds));
-               localStorage.setItem('usedPromoCodes', JSON.stringify(usedPromoCodes));
-               localStorage.setItem('activeQuests', JSON.stringify(activeQuests));
-               localStorage.setItem('usedCipherCodes', JSON.stringify(usedCipherCodes));
-               localStorage.setItem('rebirthLevel', rebirthLevel);
-               localStorage.setItem('antiLagEnabled', antiLagEnabled);
-               localStorage.setItem('quickOpeningEnabled', quickOpeningEnabled);
-               localStorage.setItem('idChanged', idChanged);
-               localStorage.setItem('sakuraTreeLevel', sakuraTreeLevel);
-               localStorage.setItem('sakuraTreeRebirths', sakuraTreeRebirths);
+               if (!userDataDocRef) return;
+               
+               // Debounce save to prevent write exhaustion
+               if (saveTimeout) clearTimeout(saveTimeout);
+               
+               saveTimeout = setTimeout(async () => {
+                   const data = {
+                       coins: coins,
+                       crystals: crystals,
+                       skin: currentSkin,
+                       ownedSkins: ownedSkins,
+                       background: currentBackground,
+                       ownedBackgrounds: ownedBackgrounds,
+                       usedPromoCodes: usedPromoCodes,
+                       activeQuests: activeQuests,
+                       rebirthLevel: rebirthLevel,
+                       antiLagEnabled: antiLagEnabled,
+                       quickOpeningEnabled: quickOpeningEnabled,
+                       autoThemeEnabled: autoThemeEnabled,
+                       theme: currentTheme,
+                       playerNickname: playerNickname,
+                       playerIcon: playerIcon,
+                       lastSave: Date.now()
+                   };
+                   
+                   try {
+                       await setDoc(userDataDocRef, data, { merge: true });
+                       // Update Public Profile for Leaderboard
+                       await setDoc(userPublicDocRef, {
+                           nickname: playerNickname,
+                           icon: playerIcon,
+                           coins: coins,
+                           crystals: crystals,
+                           rebirths: rebirthLevel,
+                           id: playerId
+                       }, { merge: true });
+                   } catch (e) {
+                       console.error("Save failed", e);
+                       // Optional: showToast("Ошибка сохранения", "error");
+                   }
+               }, 2000); // Save after 2 seconds of inactivity
            }
 
            function updateUI() {
                coinsElement.textContent = formatNumber(Math.floor(coins));
                crystalsElement.textContent = formatNumber(Math.floor(crystals));
-               sakuraPointsElement.textContent = formatNumber(Math.floor(sakuraPoints));
                
                if(shop.classList.contains('show')) { updateSkinButtons(); updateBoostButtons(); updateBackgroundButtons(); updateCaseButtons(); }
-               if(eventShopModal.classList.contains('show')) { updateEventShopButtons(); }
                if(questsModal.classList.contains('show')) { refreshQuestsBtn.disabled = crystals < 10; }
                if(rebirthModal.classList.contains('show')) { updateRebirthModal(); }
-               updateAutoThemeButtonState();
            }
 
            function updateRebirthModal() {
@@ -1247,27 +1184,13 @@
                circle.className = 'circle'; 
                circle.classList.add(skinName); 
                currentSkin = skinName; 
-               localStorage.setItem('skin', currentSkin); 
+               saveGameData();
                if(shop.classList.contains('show')) updateSkinButtons(); 
-           }
-           
-           function createPetal() {
-               const petal = document.createElement('div');
-               petal.className = 'petal';
-               const duration = Math.random() * 8 + 7;
-               const startX = Math.random() * 100;
-               petal.style.left = `${startX}vw`;
-               petal.style.animationDuration = `${duration}s`;
-               petal.style.setProperty('--rotation', `${(Math.random() - 0.5) * 1080}deg`);
-               petal.style.animationDelay = `${Math.random() * 5}s`;
-               backgroundContainer.appendChild(petal);
-               setTimeout(() => petal.remove(), (duration + 5) * 1000);
            }
            
            function applyBackground(bgName) {
                document.body.className = ''; 
                if (document.body.fireflyInterval) { clearInterval(document.body.fireflyInterval); document.querySelectorAll('.firefly').forEach(fly => fly.remove()); }
-               if (document.body.petalInterval) { clearInterval(document.body.petalInterval); document.querySelectorAll('.petal').forEach(p => p.remove()); }
                
                document.body.classList.add(bgName);
 
@@ -1282,12 +1205,10 @@
                }
                
                if (bgName === 'magic-forest-bg') { document.body.fireflyInterval = setInterval(createFirefly, 300); }
-               if (bgName === 'sakura-bg') { document.body.petalInterval = setInterval(createPetal, 200); }
                
                currentBackground = bgName;
-               localStorage.setItem('background', currentBackground);
+               saveGameData();
                if(shop.classList.contains('show')) updateBackgroundButtons();
-               updateAutoThemeButtonState();
            }
            
            function createFirefly() { 
@@ -1306,7 +1227,6 @@
                    <div class="shop-item"><div class="item-name">Легендарный</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="legendary-skin">👁️</button><button class="buy-btn" data-skin-id="legendary-skin"></button></div></div></div>
                    <div class="shop-item"><div class="item-name">Черная дыра</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="blackhole-skin">👁️</button><button class="buy-btn" data-skin-id="blackhole-skin"></button></div></div></div>
                    <div class="shop-item"><div class="item-name">CrystalMania</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="crystalmania-skin">👁️</button><button class="buy-btn" data-skin-id="crystalmania-skin"></button></div></div></div>
-                   <div class="shop-item"><div class="item-name">Сакура</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="sakura-skin">👁️</button><button class="buy-btn" data-skin-id="sakura-skin"></button></div></div></div>
                    <div class="shop-item"><div class="item-name">Водоворот</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="vortex-skin">👁️</button><button class="buy-btn" data-skin-id="vortex-skin"></button></div></div></div>
                    <div class="shop-item"><div class="item-name">Glitch</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="glitch-skin">👁️</button><button class="buy-btn" data-skin-id="glitch-skin"></button></div></div></div>
                    <div class="shop-item"><div class="item-name">Океан</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="skin" data-preview-id="ocean-skin">👁️</button><button class="buy-btn" data-skin-id="ocean-skin"></button></div></div></div>
@@ -1319,7 +1239,6 @@
                    <div class="shop-item"><div class="item-info"><div class="item-name">Автокликер</div></div><div class="item-actions"><div class="item-price">400 <span>Đ</span></div><button class="buy-btn" id="autoclickerBoostBtn">Купить</button></div></div>`;
                backgroundsTab.innerHTML = `
                    <div class="shop-item"><div class="item-name">Стандартный</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="bg" data-preview-id="default-bg">👁️</button><button class="buy-btn" data-bg-id="default-bg"></button></div></div></div>
-                   <div class="shop-item"><div class="item-name">Сакура</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="bg" data-preview-id="sakura-bg">👁️</button><button class="buy-btn" data-bg-id="sakura-bg"></button></div></div></div>
                    <div class="shop-item"><div class="item-name">Космическая туманность</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="bg" data-preview-id="space-nebula-bg">👁️</button><button class="buy-btn" data-bg-id="space-nebula-bg"></button></div></div></div>
                    <div class="shop-item"><div class="item-name">Матрица</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="bg" data-preview-id="matrix-bg">👁️</button><button class="buy-btn" data-bg-id="matrix-bg"></button></div></div></div>
                    <div class="shop-item"><div class="item-name">Волшебный лес</div><div class="item-actions"><div class="item-price"></div><div class="item-button-group"><button class="preview-btn" data-preview-type="bg" data-preview-id="magic-forest-bg">👁️</button><button class="buy-btn" data-bg-id="magic-forest-bg"></button></div></div></div>
@@ -1367,10 +1286,10 @@
 
             const shopItems = {
                 skins: [
-                    { id: 'default-skin' }, { id: 'premium-skin', price: 100, currency: 'crystals' }, { id: 'legendary-skin', price: 500, currency: 'crystals' }, { id: 'blackhole-skin', price: 1000, currency: 'crystals' }, { id: 'crystalmania-skin' }, { id: 'vortex-skin', price: 10000, currency: 'coins' }, { id: 'glitch-skin', price: 2500, currency: 'crystals' }, { id: 'ocean-skin', price: 4000, currency: 'crystals' }, { id: 'hacker-skin', price: 20000, currency: 'coins' }, { id: 'radiation-skin', price: 7500, currency: 'crystals' }, { id: 'cosmic-rift-skin', price: 7500, currency: 'crystals' }, { id: 'sakura-skin' },
+                    { id: 'default-skin' }, { id: 'premium-skin', price: 100, currency: 'crystals' }, { id: 'legendary-skin', price: 500, currency: 'crystals' }, { id: 'blackhole-skin', price: 1000, currency: 'crystals' }, { id: 'crystalmania-skin' }, { id: 'vortex-skin', price: 10000, currency: 'coins' }, { id: 'glitch-skin', price: 2500, currency: 'crystals' }, { id: 'ocean-skin', price: 4000, currency: 'crystals' }, { id: 'hacker-skin', price: 20000, currency: 'coins' }, { id: 'radiation-skin', price: 7500, currency: 'crystals' }, { id: 'cosmic-rift-skin', price: 7500, currency: 'crystals' },
                 ],
                 backgrounds: [
-                    { id: 'default-bg' }, { id: 'space-nebula-bg', price: 25000, currency: 'coins' }, { id: 'matrix-bg', price: 1000, currency: 'crystals' }, { id: 'magic-forest-bg', price: 40000, currency: 'coins' }, { id: 'liquid-waves-bg', price: 2500, currency: 'crystals' }, { id: 'cyber-grid-bg', price: 5000, currency: 'crystals' }, { id: 'sakura-bg' },
+                    { id: 'default-bg' }, { id: 'space-nebula-bg', price: 25000, currency: 'coins' }, { id: 'matrix-bg', price: 1000, currency: 'crystals' }, { id: 'magic-forest-bg', price: 40000, currency: 'coins' }, { id: 'liquid-waves-bg', price: 2500, currency: 'crystals' }, { id: 'cyber-grid-bg', price: 5000, currency: 'crystals' },
                 ]
             };
             
@@ -1398,7 +1317,7 @@
                        if (currentItem === item.id) { btn.textContent = 'Выбрано'; btn.disabled = true; } 
                        else { btn.textContent = 'Выбрать'; btn.disabled = false; btn.onclick = () => applyFunction(item.id); }
                    } else {
-                       if (item.id === 'crystalmania-skin' || item.id === 'sakura-skin' || item.id === 'sakura-bg') {
+                       if (item.id === 'crystalmania-skin') {
                            if (priceDiv) priceDiv.innerHTML = `<span style="color: #ff5252;">Из кейса</span>`;
                            btn.textContent = 'Недоступно'; btn.disabled = true; btn.onclick = null;
                        } else {
@@ -1497,8 +1416,6 @@
                coins += clickValue;
                createCoinEffect(event.clientX, event.clientY, `+${formatNumber(clickValue)}Đ`);
                if (Math.random() < crystalChance) { const crystalAmount = 1 + rebirthLevel; crystals += crystalAmount; updateQuestProgress('crystalsEarned', crystalAmount); createCrystalEffect(event.clientX, event.clientY, `+${crystalAmount} ✦`); }
-               const totalSakuraChance = sakuraCrystalChance + (sakuraTreeLevel * SAKURA_BONUS_INCREMENT);
-               if (Math.random() < totalSakuraChance) { const sakuraAmount = 1 + rebirthLevel; sakuraPoints += sakuraAmount; createSakuraEffect(event.clientX, event.clientY, `+${sakuraAmount} 🌸`); }
                saveGameData(); 
                updateUI(); 
                checkAutoclicker(event.timeStamp);
@@ -1514,8 +1431,6 @@
                    const circleRect = circle.getBoundingClientRect(); const centerX = circleRect.left + circleRect.width / 2; const centerY = circleRect.top + circleRect.height / 2;
                    const clickValue = (1 + rebirthLevel) * coinMultiplier; coins += clickValue;
                    if (Math.random() < crystalChance) { const crystalAmount = 1 + rebirthLevel; crystals += crystalAmount; updateQuestProgress('crystalsEarned', crystalAmount); createCrystalEffect(centerX, centerY, `+${crystalAmount} ✦`); }
-                   const totalSakuraChance = sakuraCrystalChance + (sakuraTreeLevel * SAKURA_BONUS_INCREMENT);
-                   if (Math.random() < totalSakuraChance) { const sakuraAmount = 1 + rebirthLevel; sakuraPoints += sakuraAmount; createSakuraEffect(centerX, centerY, `+${sakuraAmount} 🌸`); }
                    createCoinEffect(centerX, centerY, `+${formatNumber(clickValue)}Đ`); 
                    saveGameData(); updateUI();
                }, 200);
@@ -1523,7 +1438,6 @@
 
            function createCoinEffect(x, y, text) { if (antiLagEnabled) return; const e = document.createElement('div'); e.className = 'coin-effect'; e.innerHTML = text; e.style.left = `${x}px`; e.style.top = `${y}px`; document.body.appendChild(e); e.addEventListener('animationend', () => e.remove()); }
            function createCrystalEffect(x, y, text) { if (antiLagEnabled) return; const e = document.createElement('div'); e.className = 'crystal-effect'; e.innerHTML = text; e.style.left = `${x}px`; e.style.top = `${y}px`; document.body.appendChild(e); e.addEventListener('animationend', () => e.remove()); }
-           function createSakuraEffect(x, y, text) { if (antiLagEnabled) return; const e = document.createElement('div'); e.className = 'sakura-effect'; e.innerHTML = text; e.style.left = `${x}px`; e.style.top = `${y}px`; document.body.appendChild(e); e.addEventListener('animationend', () => e.remove()); }
            function showWarning() { warning.style.display = 'block'; clearTimeout(warning.timeout); warning.timeout = setTimeout(() => { warning.style.display = 'none'; }, 2000); }
            function showBanScreen() {
                banScreen.style.display = 'flex'; coins = Math.floor(coins / 2); saveGameData(); updateUI(); let timeLeft = 300; banTimer.textContent = timeLeft; circle.removeEventListener('click', handleCircleClick);
@@ -1567,15 +1481,21 @@
            function performRebirth() {
                const cost = 100000 * Math.pow(2, rebirthLevel);
                if (coins < cost) { showToast('Недостаточно монет для перерождения!', 'error'); return; }
-               showConfirmation('ВЫ ТОЧНО УВЕРЕНЫ? Вы потеряете ВЕСЬ прогресс (монеты, кристаллы, скины, квесты и т.д.), но получите постоянные бонусы. Это действие НЕЛЬЗЯ отменить.', () => {
-                   const currentRebirthLevel = rebirthLevel + 1; const currentPlayerId = playerId; const currentIdChanged = idChanged;
-                   const currentSakuraTreeLvl = sakuraTreeLevel; const currentSakuraTreeRb = sakuraTreeRebirths;
-                   localStorage.clear();
-                   localStorage.setItem('doolcoin_player_id', currentPlayerId);
-                   localStorage.setItem('rebirthLevel', currentRebirthLevel);
-                   localStorage.setItem('sakuraTreeLevel', currentSakuraTreeLvl);
-                   localStorage.setItem('sakuraTreeRebirths', currentSakuraTreeRb);
-                   if (currentIdChanged) { localStorage.setItem('idChanged', true); }
+               showConfirmation('ВЫ ТОЧНО УВЕРЕНЫ? Вы потеряете ВЕСЬ прогресс (монеты, кристаллы, скины, квесты и т.д.), но получите постоянные бонусы. Это действие НЕЛЬЗЯ отменить.', async () => {
+                   const newRebirthLevel = rebirthLevel + 1;
+                   
+                   // Prepare reset data
+                   coins = 0;
+                   crystals = 0;
+                   currentSkin = 'default-skin';
+                   ownedSkins = ['default-skin'];
+                   currentBackground = 'default-bg';
+                   ownedBackgrounds = ['default-bg'];
+                   activeQuests = [];
+                   rebirthLevel = newRebirthLevel;
+                   
+                   fillMissingQuests(true);
+                   await saveGameData(); // Trigger immediate save
                    location.reload();
                });
            }
@@ -1591,7 +1511,6 @@
                 switch (reward.type) {
                     case 'coins': coins += reward.value; message = `Вы получили ${formatNumber(reward.value)} монет!`; break;
                     case 'crystals': crystals += reward.value; message = `Вы получили ${formatNumber(reward.value)} кристаллов!`; break;
-                    case 'sakura_points': sakuraPoints += reward.value; message = `Вы получили ${formatNumber(reward.value)} очков сакуры! 🌸`; break;
                     case 'skin':
                         if (ownedSkins.includes(reward.value)) { coins += 5000; message = `Вам выпал дубликат скина! Компенсация: 5,000 монет.`; } 
                         else { buySkin(reward.value, 0, 'coins'); message = `Новый скин разблокирован: "${getSkinName(reward.value)}"!`; } break;
@@ -1625,13 +1544,12 @@
                 } else if (type === 'bg') {
                     previewTitle.textContent = `Фон: ${getBackgroundName(id)}`; previewContent.classList.add(id);
                     if (id === 'magic-forest-bg') { for (let i = 0; i < 5; i++) { const fly = document.createElement('div'); fly.className = 'firefly'; fly.style.position = 'absolute'; const duration = Math.random() * 5 + 5; const delay = Math.random() * 5; fly.style.top = `${Math.random() * 100}%`; fly.style.animation = `firefly-float ${duration}s ${delay}s linear infinite`; fly.style.setProperty('--y-end', `${(Math.random() - 0.5) * 20}vh`); previewContent.appendChild(fly); } }
-                    if (id === 'sakura-bg') { for (let i = 0; i < 10; i++) { const petal = document.createElement('div'); petal.className = 'petal'; petal.style.position = 'absolute'; const duration = Math.random() * 8 + 7; petal.style.left = `${Math.random() * 100}%`; petal.style.animation = `fall ${duration}s ${Math.random() * 5}s linear infinite`; petal.style.setProperty('--rotation', `${(Math.random() - 0.5) * 1080}deg`); previewContent.appendChild(petal); } }
                 }
                 showModal(previewModal);
             }
 
             function showCaseContents(caseId) {
-                const caseItem = cases.find(c => c.id === caseId) || (caseId === 'sakura_case' ? sakuraCase : null); if (!caseItem) return;
+                const caseItem = cases.find(c => c.id === caseId); if (!caseItem) return;
                 caseInfoTitle.textContent = `Содержимое: ${caseItem.name}`;
                 caseInfoContent.innerHTML = '';
                 const rarityOrder = { 'mythic': 6, 'legendary': 5, 'epic': 4, 'rare': 3, 'uncommon': 2, 'common': 1 };
@@ -1642,7 +1560,6 @@
                     switch (reward.type) {
                         case 'coins': name = `${formatNumber(reward.value)} Монет`; icon = 'Đ'; break;
                         case 'crystals': name = `${formatNumber(reward.value)} Кристаллов`; icon = '✦'; break;
-                        case 'sakura_points': name = `${formatNumber(reward.value)} Очков Сакуры`; icon = '🌸'; break;
                         case 'skin': name = `Скин: "${getSkinName(reward.value)}"`; icon = '🎨'; break;
                         case 'background': name = `Фон: "${getBackgroundName(reward.value)}"`; icon = '🖼️'; break;
                         case 'rebirth': name = `${reward.value} Ур. Перерождения`; icon = '♻️'; break;
@@ -1696,12 +1613,12 @@
             }
 
             function getSkinName(id) {
-                 const nameMap = { 'default-skin':'Стандартный', 'premium-skin':'Премиум', 'legendary-skin':'Легендарный', 'blackhole-skin':'Черная дыра', 'crystalmania-skin':'CrystalMania', 'vortex-skin':'Водоворот', 'glitch-skin':'Glitch', 'ocean-skin':'Океан', 'hacker-skin':'Хакер', 'radiation-skin':'Радиация', 'cosmic-rift-skin':'Космический разлом', 'sakura-skin':'Сакура' };
+                 const nameMap = { 'default-skin':'Стандартный', 'premium-skin':'Премиум', 'legendary-skin':'Легендарный', 'blackhole-skin':'Черная дыра', 'crystalmania-skin':'CrystalMania', 'vortex-skin':'Водоворот', 'glitch-skin':'Glitch', 'ocean-skin':'Океан', 'hacker-skin':'Хакер', 'radiation-skin':'Радиация', 'cosmic-rift-skin':'Космический разлом' };
                  return nameMap[id] || id;
             }
 
             function getBackgroundName(id) {
-                 const nameMap = { 'default-bg':'Стандартный', 'space-nebula-bg':'Космическая туманность', 'matrix-bg':'Матрица', 'magic-forest-bg':'Волшебный лес', 'liquid-waves-bg':'Жидкие волны', 'cyber-grid-bg':'Кибер-сетка', 'sakura-bg':'Сакура' };
+                 const nameMap = { 'default-bg':'Стандартный', 'space-nebula-bg':'Космическая туманность', 'matrix-bg':'Матрица', 'magic-forest-bg':'Волшебный лес', 'liquid-waves-bg':'Жидкие волны', 'cyber-grid-bg':'Кибер-сетка' };
                  return nameMap[id] || id;
             }
             
@@ -1711,7 +1628,6 @@
                 switch (item.type) {
                     case 'coins': name = `${formatNumber(item.value)} Đ`; innerHTML = `<div class="item-icon">Đ</div>`; break;
                     case 'crystals': name = `${formatNumber(item.value)} ✦`; innerHTML = `<div class="item-icon">✦</div>`; break;
-                    case 'sakura_points': name = `${formatNumber(item.value)} 🌸`; innerHTML = `<div class="item-icon">🌸</div>`; break;
                     case 'skin': name = getSkinName(item.value); innerHTML = `<div class="item-icon">🎨</div>`; break;
                     case 'background': name = getBackgroundName(item.value); innerHTML = `<div class="item-icon">🖼️</div>`; break;
                     case 'rebirth': name = `${item.value} Перерожд.`; innerHTML = `<div class="item-icon">♻️</div>`; break;
@@ -1727,7 +1643,6 @@
                  switch (reward.type) {
                     case 'coins': name = `${formatNumber(reward.value)} Монет`; wonPrizeIcon.textContent = 'Đ'; break;
                     case 'crystals': name = `${formatNumber(reward.value)} Кристаллов`; wonPrizeIcon.textContent = '✦'; break;
-                    case 'sakura_points': name = `${formatNumber(reward.value)} Очков Сакуры`; wonPrizeIcon.textContent = '🌸'; break;
                     case 'skin': name = getSkinName(reward.value); wonPrizeIcon.textContent = '🎨'; break;
                     case 'background': name = getBackgroundName(reward.value); wonPrizeIcon.textContent = '🖼️'; break;
                     case 'rebirth': name = `${reward.value} УР. ПЕРЕРОЖДЕНИЯ!`; wonPrizeIcon.textContent = '♻️'; break;
@@ -1739,13 +1654,6 @@
                 setTimeout(() => { caseResultContainer.classList.add('visible'); }, 500);
             }
 
-           const cipherMap = { '0': 'A', '1': 'B', '2': 'C', '3': 'D', '4': 'E', '5': 'F', '6': 'G', '7': 'H', '8': 'I', '9': 'J', 'a': 'K', 'b': 'L', 'c': 'M', 'd': 'N', 'e': 'O', 'f': 'P' };
-           const decipherMap = Object.fromEntries(Object.entries(cipherMap).map(([key, value]) => [value, key]));
-           function stringToHex(str) { let hex = ''; for (let i = 0; i < str.length; i++) { hex += '' + str.charCodeAt(i).toString(16); } return hex; }
-           function hexToString(hex) { let str = ''; for (let i = 0; i < hex.length; i += 2) { str += String.fromCharCode(parseInt(hex.substr(i, 2), 16)); } return str; }
-           function encrypt(text) { return stringToHex(text.split('').reverse().join('')).split('').map(char => cipherMap[char] || char).join(''); }
-           function decrypt(cipher) { try { const hex = cipher.split('').map(char => decipherMap[char] || char).join(''); if (!/^[0-9a-f]+$/.test(hex)) return null; return hexToString(hex).split('').reverse().join(''); } catch (e) { return null; } }
-           
            function showToast(message, type = 'info', duration = 3000) {
                const toast = document.createElement('div'); toast.className = `toast ${type}`; toast.textContent = message; toastContainer.appendChild(toast);
                setTimeout(() => { toast.classList.add('show'); }, 10); setTimeout(() => { toast.classList.remove('show'); toast.addEventListener('transitionend', () => toast.remove()); }, duration);
@@ -1758,131 +1666,6 @@
                confirmBtn.onclick = () => { onConfirmCallback(); hideModal(confirmationModal); };
            }
            
-           // --- Event Shop Logic ---
-           function startEventShopSpawner() {
-                if(eventShopInterval) clearInterval(eventShopInterval);
-                eventShopInterval = setInterval(() => {
-                    if (eventShopBtn.style.display === 'block' || eventShopModal.classList.contains('show')) return;
-                    const totalShopChance = 0.01 + (sakuraTreeLevel * SAKURA_BONUS_INCREMENT);
-                    if (Math.random() < totalShopChance) {
-                        eventShopBtn.style.display = 'block';
-                        eventShopTimeout = setTimeout(() => { eventShopBtn.style.display = 'none'; }, 30000);
-                    }
-                }, 1000);
-           }
-
-           function fillEventShop() {
-                eventShopContent.innerHTML = `
-                    <div class="shop-item" id="sakuraTreeItem">
-                        <div class="item-name">Дерево Сакуры</div>
-                        <img src="https://raw.githubusercontent.com/TriOX-roblox/coinew/refs/heads/main/sukura.png" alt="Дерево Сакуры" id="sakuraTreeImage">
-                        <div class="sakura-tree-info">
-                            <div>Уровень: <span id="sakuraTreeLevelDisplay">0</span>/5</div>
-                            <div>Перерождений: <span id="sakuraTreeRebirthsDisplay">0</span></div>
-                            <div>Бонус шанса 🌸: +<span id="sakuraDropBonusDisplay">0</span>%</div>
-                            <div>Бонус магазина: +<span id="sakuraShopBonusDisplay">0</span>%</div>
-                        </div>
-                        <div class="progress-bar-container" id="sakuraTreeProgressBar">
-                            <div class="progress-bar-segment"></div>
-                            <div class="progress-bar-segment"></div>
-                            <div class="progress-bar-segment"></div>
-                            <div class="progress-bar-segment"></div>
-                            <div class="progress-bar-segment"></div>
-                        </div>
-                        <div class="item-actions">
-                            <button class="buy-btn" id="upgradeSakuraTreeBtn">Улучшить</button>
-                        </div>
-                    </div>
-                    <div class="case-item">
-                        <div class="case-info"> <img src="${caseImages.sakura_case}" alt="${sakuraCase.name}"> <div class="case-details"> <div class="item-name">${sakuraCase.name}</div></div></div>
-                        <div class="item-actions">
-                            <div class="item-price">${formatNumber(sakuraCase.price)} <span class="sakura-icon">🌸</span></div>
-                            <div class="case-button-group">
-                                <button class="view-case-btn" title="Посмотреть содержимое" data-case-id="sakura_case">👁️</button>
-                                <button class="buy-btn" data-event-item="sakura_case">Купить</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="shop-item">
-                        <div class="item-name">Обменять Đ на 🌸</div>
-                        <div class="item-actions">
-                            <div class="item-price" style="font-size: 14px;">Курс: ${SAKURA_EXCHANGE_RATE} Đ = 1 🌸</div>
-                            <button class="buy-btn" id="openSakuraExchangeBtn">Обменять</button>
-                        </div>
-                    </div>
-                `;
-                protectImages();
-                document.getElementById('openSakuraExchangeBtn').addEventListener('click', () => {
-                    sakuraExchangeInput.value = '';
-                    sakuraExchangeOutput.textContent = 'Вы получите: 0 🌸';
-                    sakuraExchangeSubmit.disabled = true;
-                    showModal(sakuraExchangeModal);
-                });
-                document.getElementById('upgradeSakuraTreeBtn').addEventListener('click', upgradeSakuraTree);
-           }
-            
-           function updateEventShopButtons() {
-                const buyCaseBtn = eventShopContent.querySelector('[data-event-item="sakura_case"]');
-                if (buyCaseBtn) buyCaseBtn.disabled = sakuraPoints < sakuraCase.price;
-                updateSakuraTreeUI();
-           }
-
-           function upgradeSakuraTree() {
-               if (sakuraTreeLevel < 5) { // Regular upgrade
-                   const cost = SAKURA_TREE_COSTS[sakuraTreeLevel];
-                   if (sakuraPoints >= cost) {
-                       sakuraPoints -= cost;
-                       sakuraTreeLevel++;
-                       showToast(`Дерево Сакуры улучшено до уровня ${sakuraTreeLevel}!`, 'success');
-                   } else {
-                       showToast('Недостаточно очков сакуры!', 'error');
-                       return;
-                   }
-               } else { // Rebirth
-                   sakuraTreeLevel = 0;
-                   sakuraTreeRebirths++;
-                   rebirthLevel++; // Adds one to the main rebirth level
-                   showToast('Дерево Сакуры переродилось! +1 уровень перерождения!', 'success');
-               }
-               saveGameData();
-               updateUI();
-           }
-
-           function updateSakuraTreeUI() {
-               if (!document.getElementById('sakuraTreeItem')) return;
-               document.getElementById('sakuraTreeLevelDisplay').textContent = sakuraTreeLevel;
-               document.getElementById('sakuraTreeRebirthsDisplay').textContent = sakuraTreeRebirths;
-               
-               const dropBonus = (sakuraTreeLevel * SAKURA_BONUS_INCREMENT * 100).toFixed(1);
-               const shopBonus = (sakuraTreeLevel * SAKURA_BONUS_INCREMENT * 100).toFixed(1);
-               document.getElementById('sakuraDropBonusDisplay').textContent = dropBonus;
-               document.getElementById('sakuraShopBonusDisplay').textContent = shopBonus;
-
-               const segments = document.querySelectorAll('#sakuraTreeProgressBar .progress-bar-segment');
-               segments.forEach((segment, index) => {
-                   segment.classList.toggle('filled', index < sakuraTreeLevel);
-               });
-               
-               const btn = document.getElementById('upgradeSakuraTreeBtn');
-               if (sakuraTreeLevel < 5) {
-                   const cost = SAKURA_TREE_COSTS[sakuraTreeLevel];
-                   btn.innerHTML = `Улучшить <br>(${formatNumber(cost)} <span class="sakura-icon" style="font-size: 14px;">🌸</span>)`;
-                   btn.disabled = sakuraPoints < cost;
-               } else {
-                   btn.innerHTML = `Перерождение <br>(Бесплатно)`;
-                   btn.disabled = false;
-               }
-           }
-
-           eventShopContent.addEventListener('click', (e) => {
-                const target = e.target.closest('button'); if (!target) return;
-                if (target.matches('.view-case-btn')) { showCaseContents('sakura_case'); return; }
-                if(target.dataset.eventItem === 'sakura_case') {
-                    if (sakuraPoints >= sakuraCase.price) { sakuraPoints -= sakuraCase.price; saveGameData(); updateUI(); hideModal(eventShopModal); startCaseOpeningAnimation(sakuraCase); } 
-                    else { showToast('Недостаточно очков сакуры!', 'error'); }
-                }
-           });
-
            // --- Event Listeners ---
            circle.addEventListener('click', handleCircleClick);
            circle.addEventListener('mousedown', handleGlitchLongPressStart);
@@ -1893,18 +1676,17 @@
            circle.addEventListener('touchcancel', handleGlitchLongPressEnd);
            panelToggle.addEventListener('click', () => retractablePanel.classList.toggle('expanded'));
            
-           const modalButtons = { shopBtn: shop, questsBtn: questsModal, transferBtn: transferModal, exchangeBtn: exchangeModal, promocodeBtn: promocodeModal, settingsBtn: settingsModal, rebirthBtn: rebirthModal, changelogBtn: changelogModal, eventShopBtn: eventShopModal };
+           const modalButtons = { shopBtn: shop, questsBtn: questsModal, transferBtn: transferModal, exchangeBtn: exchangeModal, promocodeBtn: promocodeModal, settingsBtn: settingsModal, rebirthBtn: rebirthModal, changelogBtn: changelogModal, leaderboardBtn: leaderboardModal };
            Object.entries(modalButtons).forEach(([btnId, modal]) => {
                 const btn = document.getElementById(btnId);
                 if (btn) {
                    btn.addEventListener('click', () => {
-                       if (btnId === 'eventShopBtn') { clearTimeout(eventShopTimeout); eventShopBtn.style.display = 'none'; }
                        showModal(modal); updateUI();
                        if (modal === questsModal) renderQuests();
                        if (modal === exchangeModal) { exchangeInput.value = ''; exchangeSubmit.disabled = true; }
-                       if (modal === transferModal) { generatedCodeArea.value = ''; claimCodeInput.value = ''; }
-                       if (modal === settingsModal) { updatePlayTimeDisplay(); updateSettingsButtons(); }
+                       if (modal === transferModal) { recipientIdInput.value = ''; transferAmountInput.value = ''; }
                        if (modal === rebirthModal) updateRebirthModal();
+                       if (modal === leaderboardModal) updateLeaderboard();
                    });
                 }
            });
@@ -1928,105 +1710,158 @@
            closeBoxAnimationBtn.addEventListener('click', () => { hideModal(boxAnimationOverlay); startCaseOpeningAnimation(currentAnimationReward); });
            skipBoxBtn.addEventListener('click', () => { if (boxTimeoutId) clearTimeout(boxTimeoutId); hideModal(boxAnimationOverlay); showToast(`Вам выпал кейс "${currentAnimationReward.name}"! Открываем...`, 'success'); setTimeout(() => startCaseOpeningAnimation(currentAnimationReward), 100); isAnimationRunning = false; });
            
- generateCodeBtn.addEventListener('click', () => {
-    const recipientId = recipientIdInput.value.trim().toUpperCase();
-    const amount = parseInt(transferAmountInput.value);
-    const currencyType = document.querySelector('input[name="currencyType"]:checked').value;
+           // --- Leaderboard Logic ---
+           async function updateLeaderboard() {
+               leaderboardList.innerHTML = '<div style="text-align:center; padding: 20px;">Загрузка...</div>';
+               try {
+                    // Fetch all public profiles (Rule 2: No complex queries/ordering on server if not indexed)
+                    const q = collection(db, 'artifacts', appId, 'public', 'data', 'profiles');
+                    const querySnapshot = await getDocs(q);
+                    
+                    let users = [];
+                    querySnapshot.forEach((doc) => {
+                        const d = doc.data();
+                        users.push({
+                            name: d.nickname || "Игрок",
+                            icon: d.icon || "👤",
+                            score: d.coins || 0,
+                            id: d.id || "???"
+                        });
+                    });
 
-    // --- 1. Проверки на корректность введенных данных ---
-    if (recipientId.length !== 9 || !/^[A-Z0-9]+$/.test(recipientId)) {
-        showToast("ID получателя должен состоять из 9 букв и цифр.", 'error');
-        return;
-    }
-    if (isNaN(amount) || amount <= 0) {
-        showToast("Введите корректное количество.", 'error');
-        return;
-    }
+                    // Sort in memory
+                    users.sort((a, b) => b.score - a.score);
+                    const top50 = users.slice(0, 50);
 
-    // --- 2. Проверка баланса, вычет валюты и сохранение ---
-    if (currencyType === 'COIN') {
-        if (coins < amount) {
-            showToast("Недостаточно монет.", 'error');
-            return;
-        }
-        // Мгновенно вычитаем монеты
-        coins -= amount;
-    } else if (currencyType === 'CRYS') {
-        if (crystals < amount) {
-            showToast("Недостаточно кристаллов.", 'error');
-            return;
-        }
-        // Мгновенно вычитаем кристаллы
-        crystals -= amount;
-    }
+                    leaderboardList.innerHTML = '';
+                    if (top50.length === 0) {
+                        leaderboardList.innerHTML = '<div style="text-align:center; padding: 20px;">Нет данных</div>';
+                        return;
+                    }
 
-    // Сразу сохраняем изменения и обновляем интерфейс
-    saveGameData();
-    updateUI();
+                    top50.forEach((user, index) => {
+                        const item = document.createElement('div');
+                        item.className = 'leaderboard-item';
+                        if (user.id === playerId) item.style.borderColor = '#00ffff';
+                        
+                        item.innerHTML = `
+                            <div class="leaderboard-rank">${index + 1}</div>
+                            <div class="leaderboard-avatar">${user.icon}</div>
+                            <div class="leaderboard-info">
+                                <div class="leaderboard-name">${user.name}</div>
+                                <div class="leaderboard-score">${formatNumber(user.score)} Đ</div>
+                            </div>
+                        `;
+                        leaderboardList.appendChild(item);
+                    });
 
-    // --- 3. Генерация шифр-кода ---
-    const nonce = Date.now() + Math.floor(Math.random() * 10000000);
-    const plaintext = `${nonce}x${amount}x${currencyType}x${recipientId}`;
+               } catch (e) {
+                   console.error(e);
+                   leaderboardList.innerHTML = '<div style="text-align:center; padding: 20px;">Ошибка загрузки</div>';
+               }
+           }
+           refreshLeaderboardBtn.addEventListener('click', updateLeaderboard);
 
-    generatedCodeArea.value = encrypt(plaintext);
-    showToast("Шифр-код успешно сгенерирован!", 'success');
-});
+           // --- Avatar & Profile Logic ---
+           function renderAvatarGrid() {
+               avatarGrid.innerHTML = '';
+               AVATARS.forEach(icon => {
+                   const el = document.createElement('div');
+                   el.className = 'avatar-option';
+                   el.textContent = icon;
+                   if (icon === playerIcon) el.classList.add('selected');
+                   el.onclick = () => {
+                       playerIcon = icon;
+                       document.querySelectorAll('.avatar-option').forEach(d => d.classList.remove('selected'));
+                       el.classList.add('selected');
+                   };
+                   avatarGrid.appendChild(el);
+               });
+           }
 
-           claimCodeBtn.addEventListener('click', () => {
-               const code = claimCodeInput.value.trim(); if (!code) { showToast("Введите шифр-код.", 'error'); return; }
-               const plaintext = decrypt(code); if (!plaintext) { showToast("Неверный или поврежденный код.", 'error'); return; }
-               const parts = plaintext.split('x'); if (parts.length !== 4) { showToast("Неверный формат кода.", 'error'); return; }
-               const [nonce, amountStr, currencyType, recipientId] = parts; const amount = parseInt(amountStr);
-               if (recipientId !== playerId) { showToast("Этот код предназначен для другого игрока.", 'error'); return; }
-               if (usedCipherCodes.includes(nonce)) { showToast("Этот код уже был использован.", 'error'); return; }
-               if (currencyType === 'COIN') { coins += amount; showToast(`Вы получили ${formatNumber(amount)} монет!`, 'success'); } 
-               else if (currencyType === 'CRYS') { crystals += amount; showToast(`Вы получили ${formatNumber(amount)} кристаллов!`, 'success'); } 
-               else { showToast("Неизвестный тип валюты в коде.", 'error'); return; }
-               usedCipherCodes.push(nonce); saveGameData(); updateUI(); claimCodeInput.value = '';
+           saveProfileBtn.addEventListener('click', () => {
+               const newName = nicknameInput.value.trim();
+               if (newName.length < 3 || newName.length > 15) {
+                   showToast('Никнейм должен быть от 3 до 15 символов', 'error');
+                   return;
+               }
+               playerNickname = newName;
+               saveGameData();
+               showToast('Профиль сохранен!', 'success');
            });
 
-           themeToggle.addEventListener('click', function() { if (themeSwitcher.classList.contains('disabled')) return; autoThemeEnabled = false; localStorage.setItem('autoThemeEnabled', 'false'); autoThemeToggleBtn.classList.remove('active'); const newTheme = this.classList.toggle('active') ? 'light' : 'dark'; applyTheme(newTheme); });
+           // --- Transfer Logic (No Cipher) ---
+           sendTransferBtn.addEventListener('click', async () => {
+                const targetId = recipientIdInput.value.trim().toUpperCase();
+                const amount = parseInt(transferAmountInput.value);
+                const currencyType = document.querySelector('input[name="currencyType"]:checked').value;
+
+                if (targetId.length !== 9) { showToast('ID должен быть 9 символов', 'error'); return; }
+                if (targetId === playerId) { showToast('Нельзя отправить себе', 'error'); return; }
+                if (isNaN(amount) || amount <= 0) { showToast('Неверная сумма', 'error'); return; }
+
+                if (currencyType === 'COIN' && coins < amount) { showToast('Недостаточно монет', 'error'); return; }
+                if (currencyType === 'CRYS' && crystals < amount) { showToast('Недостаточно кристаллов', 'error'); return; }
+
+                sendTransferBtn.disabled = true;
+                sendTransferBtn.textContent = "Отправка...";
+
+                try {
+                    // Check if recipient exists by looking at public profile
+                    // Note: We need the full UID to write to 'inbox', but we only have Short ID.
+                    // This is why we use a PUBLIC collection for transfers where 'to' is the Short ID.
+                    
+                    // Deduct locally first
+                    if (currencyType === 'COIN') coins -= amount;
+                    else crystals -= amount;
+                    
+                    saveGameData();
+
+                    // Create Transfer Document in Public Data
+                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'transfers'), {
+                        to: targetId,
+                        from: playerId,
+                        amount: amount,
+                        currency: currencyType,
+                        timestamp: Date.now()
+                    });
+
+                    showToast('Перевод отправлен!', 'success');
+                    recipientIdInput.value = '';
+                    transferAmountInput.value = '';
+                    hideModal(transferModal);
+
+                } catch (e) {
+                    console.error(e);
+                    showToast('Ошибка отправки', 'error');
+                    // Refund if error (simple implementation)
+                    if (currencyType === 'COIN') coins += amount;
+                    else crystals += amount;
+                    updateUI();
+                } finally {
+                    sendTransferBtn.disabled = false;
+                    sendTransferBtn.textContent = "Отправить";
+                }
+           });
+
+
+           themeToggle.addEventListener('click', function() { if (themeSwitcher.classList.contains('disabled')) return; autoThemeEnabled = false; autoThemeToggleBtn.classList.remove('active'); const newTheme = this.classList.toggle('active') ? 'light' : 'dark'; applyTheme(newTheme); saveGameData(); });
            autoThemeToggleBtn.addEventListener('click', toggleAutoTheme);
            antiLagToggleBtn.addEventListener('click', toggleAntiLag);
            quickOpeningToggleBtn.addEventListener('click', toggleQuickOpening);
            telegramBtn.addEventListener('click', () => window.open('https://t.me/D00lcoin', '_blank'));
 
            shopTabs.forEach(tab => { tab.addEventListener('click', function() { const tabName = this.dataset.tab; shopTabs.forEach(t => t.classList.remove('active')); this.classList.add('active'); document.querySelectorAll('.shop-tab-content').forEach(pane => { pane.classList.remove('active'); }); document.getElementById(`${tabName}Tab`).classList.add('active'); updateUI(); }); });
-           transferTabs.forEach(tab => { tab.addEventListener('click', function() { const tabName = this.dataset.tab; transferTabs.forEach(t => t.classList.remove('active')); this.classList.add('active'); activateTab.style.display = 'none'; createTab.style.display = 'none'; document.getElementById(`${tabName}Tab`).style.display = 'block'; }); });
-
+           
            exchangeInput.addEventListener('input', function() { const value = parseInt(this.value); exchangeSubmit.disabled = isNaN(value) || value <= 0 || value > crystals; });
            exchangeSubmit.addEventListener('click', function() { const amountToExchange = parseInt(exchangeInput.value); if (amountToExchange > 0 && amountToExchange <= crystals) { crystals -= amountToExchange; coins += amountToExchange * 100; updateQuestProgress('crystalsExchanged', amountToExchange); saveGameData(); updateUI(); hideModal(exchangeModal); showToast('Обмен прошел успешно!', 'success'); } });
            exchangeCancel.addEventListener('click', () => hideModal(exchangeModal));
-
-            sakuraExchangeInput.addEventListener('input', function() { 
-                const value = parseInt(this.value); 
-                if (isNaN(value) || value <= 0) {
-                    sakuraExchangeOutput.textContent = 'Вы получите: 0 🌸';
-                    sakuraExchangeSubmit.disabled = true;
-                } else {
-                    const pointsToGet = Math.floor(value / SAKURA_EXCHANGE_RATE);
-                    sakuraExchangeOutput.textContent = `Вы получите: ${formatNumber(pointsToGet)} 🌸`;
-                    sakuraExchangeSubmit.disabled = value < SAKURA_EXCHANGE_RATE || value > coins;
-                }
-            });
-            sakuraExchangeSubmit.addEventListener('click', function() { 
-                const amountToExchange = parseInt(sakuraExchangeInput.value); 
-                if (amountToExchange >= SAKURA_EXCHANGE_RATE && amountToExchange <= coins) { 
-                    const pointsGained = Math.floor(amountToExchange / SAKURA_EXCHANGE_RATE);
-                    coins -= pointsGained * SAKURA_EXCHANGE_RATE; 
-                    sakuraPoints += pointsGained;
-                    saveGameData(); updateUI(); hideModal(sakuraExchangeModal); 
-                    showToast(`Обмен на ${formatNumber(pointsGained)} 🌸 прошел успешно!`, 'success'); 
-                } 
-            });
-            sakuraExchangeCancel.addEventListener('click', () => hideModal(sakuraExchangeModal));
 
            activatePromocodeBtn.addEventListener('click', function() {
                const code = promocodeInput.value.trim().toUpperCase(); promocodeInput.value = '';
                if (promoCodes[code]) {
                    const promo = promoCodes[code];
                    if (usedPromoCodes.includes(code)) { showToast('Промокод уже был использован.', 'error'); return; }
-                   if (code === "ACTIVATEADMINPANNELCODETRUE") { showModal(adminPanel); showToast(promo.message, 'success'); return; }
                    usedPromoCodes.push(code); grantReward(promo);
                } else { showToast('Неверный промокод.', 'error'); }
            });
@@ -2037,36 +1872,16 @@
                if (e.target.matches('#autoclickerBoostBtn')) activateBoost('autoclicker', 30, 1, 400);
            });
            
-           setCoinsBtn.addEventListener('click', () => { coins = parseFloat(adminCoinsInput.value) || coins; saveGameData(); updateUI(); showToast('Монеты установлены!', 'success'); });
-           addCoinsBtn.addEventListener('click', () => { coins += parseFloat(adminCoinsInput.value) || 0; saveGameData(); updateUI(); showToast('Монеты добавлены!', 'success'); });
-           setCrystalsBtn.addEventListener('click', () => { crystals = parseFloat(adminCrystalsInput.value) || crystals; saveGameData(); updateUI(); showToast('Кристаллы установлены!', 'success'); });
-           addCrystalsBtn.addEventListener('click', () => { crystals += parseFloat(adminCrystalsInput.value) || 0; saveGameData(); updateUI(); showToast('Кристаллы добавлены!', 'success'); });
-           setSakuraBtn.addEventListener('click', () => { sakuraPoints = parseFloat(adminSakuraInput.value) || sakuraPoints; saveGameData(); updateUI(); showToast('Очки Сакуры установлены!', 'success'); });
-           addSakuraBtn.addEventListener('click', () => { sakuraPoints += parseFloat(adminSakuraInput.value) || 0; saveGameData(); updateUI(); showToast('Очки Сакуры добавлены!', 'success'); });
-           setRebirthsBtn.addEventListener('click', () => { rebirthLevel = parseInt(adminRebirthsInput.value) || rebirthLevel; saveGameData(); updateUI(); showToast('Перерождения установлены!', 'success'); });
-           addRebirthsBtn.addEventListener('click', () => { rebirthLevel += parseInt(adminRebirthsInput.value) || 0; saveGameData(); updateUI(); showToast('Перерождения добавлены!', 'success'); });
-           
-           let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-           adminPanelHeader.onmousedown = (e) => { e.preventDefault(); pos3 = e.clientX; pos4 = e.clientY; document.onmouseup = () => { document.onmouseup = null; document.onmousemove = null; }; document.onmousemove = (e) => { e.preventDefault(); pos1 = pos3 - e.clientX; pos2 = pos4 - e.clientY; pos3 = e.clientX; pos4 = e.clientY; adminPanel.querySelector('.admin-panel-draggable').style.top = (adminPanel.querySelector('.admin-panel-draggable').offsetTop - pos2) + "px"; adminPanel.querySelector('.admin-panel-draggable').style.left = (adminPanel.querySelector('.admin-panel-draggable').offsetLeft - pos1) + "px"; }; };
-           
            copyIdBtn.addEventListener('click', () => { navigator.clipboard.writeText(playerId).then(() => { showToast('ID скопирован в буфер обмена!', 'success'); }).catch(() => { showToast('Не удалось скопировать ID', 'error'); }); });
-           changeIdBtn.addEventListener('click', () => {
-                if (idChanged) { showToast('Вы уже меняли свой ID.', 'error'); return; }
-                if (rebirthLevel < 1) { showToast('Требуется 1-й уровень перерождения для смены ID.', 'error'); return; }
-                showConfirmation('Вы уверены, что хотите сменить ID? Это будет стоить 1 уровень перерождения и это действие можно совершить только один раз.', () => {
-                    rebirthLevel -= 1; idChanged = true; generatePlayerId(true);
-                    showToast('Ваш ID был успешно изменен.', 'info');
-                    saveGameData(); updateSettingsButtons();
-                });
-            });
-           fullResetBtn.addEventListener('click', () => { showConfirmation('ВЫ УВЕРЕНЫ? Это действие полностью сотрет весь ваш прогресс (монеты, скины, квесты и т.д.) и перезапустит игру. ОТМЕНИТЬ БУДЕТ НЕВОЗМОЖНО.', () => { localStorage.clear(); location.reload(); }); });
+           
+           fullResetBtn.addEventListener('click', () => { showConfirmation('ВЫ УВЕРЕНЫ? Это действие полностью сотрет весь ваш прогресс (монеты, скины, квесты и т.д.) и перезапустит игру. ОТМЕНИТЬ БУДЕТ НЕВОЗМОЖНО.', async () => {
+                // Clear firestore doc
+                coins = 0; crystals = 0; currentSkin = 'default-skin'; ownedSkins = ['default-skin'];
+                await saveGameData();
+                location.reload(); 
+            }); });
            cancelBtn.addEventListener('click', () => hideModal(confirmationModal));
 
-           // Secret promocode listeners
-           gameVersionElement.addEventListener('mousedown', () => { versionHoldTimer = setTimeout(() => { showToast('Секретный промокод: 50KSECRETCRYSTALS', 'info', 5000); }, 2000); });
-           ['mouseup', 'mouseleave', 'touchend'].forEach(evt => gameVersionElement.addEventListener(evt, () => clearTimeout(versionHoldTimer)));
-           
-           initializeGame();
        });
    </script>
 </body>
